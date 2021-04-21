@@ -64,13 +64,14 @@ export default {
     font-size: 0.8rem;
     text-transform: capitalize;
     padding: 10px;
+    width: 150px;
 
     background: var(--card-white);
     border: 3px solid var(--card-dark-blue);
     border-radius: 8px;
     box-shadow: 0 10px 6px -6px var(--card-black);
 
-    width: 150px;
+    transition: all 0.2s ease;
 
     &_img {
       display: flex;
@@ -115,5 +116,9 @@ export default {
         padding: 2px 5px;
       }
     }
+  }
+
+  .card:hover {
+    transform: translateY(-10px);
   }
 </style>
