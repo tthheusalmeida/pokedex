@@ -13,6 +13,7 @@
 
 <script>
 import PokeCard from '@/components/PokeCard.vue';
+import { fetchData } from '@/services/PokeApi';
 
 export default {
   name: 'PokeList',
@@ -42,6 +43,15 @@ export default {
         },
       ],
     };
+  },
+  created() {
+    this.getPokemonData();
+  },
+  methods: {
+    async getPokemonData() {
+      const pokemon = await fetchData(1);
+      console.log('pokemon: ', pokemon);
+    },
   },
 };
 
