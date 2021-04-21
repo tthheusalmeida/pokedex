@@ -14,7 +14,7 @@ export async function fetchData(id) {
     .get()
     .then((response) => {
       if (response.status === 200) {
-        data = response;
+        data = response?.data;
       }
     })
     .catch((error) => {

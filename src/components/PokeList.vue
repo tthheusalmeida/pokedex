@@ -42,6 +42,7 @@ export default {
           img: 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/007.png',
         },
       ],
+      pokemonsData: [],
     };
   },
   created() {
@@ -49,8 +50,12 @@ export default {
   },
   methods: {
     async getPokemonData() {
-      const pokemon = await fetchData(1);
-      console.log('pokemon: ', pokemon);
+      const pokemon1 = await fetchData(1);
+      const pokemon2 = await fetchData(4);
+      const pokemon3 = await fetchData(7);
+      this.pokemonsData.push(pokemon1);
+      this.pokemonsData.push(pokemon2);
+      this.pokemonsData.push(pokemon3);
     },
   },
 };
