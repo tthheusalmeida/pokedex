@@ -52,6 +52,7 @@ export default {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
   }
   .pokemon {
     margin: 10px 5px;

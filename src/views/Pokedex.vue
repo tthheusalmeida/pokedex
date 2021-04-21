@@ -22,7 +22,6 @@ export default {
 <style lang="scss">
   .container {
     min-width: calc(90vw);
-    padding-right: 20px;
 
     ul {
       margin: 0;

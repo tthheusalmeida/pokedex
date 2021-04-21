@@ -65,9 +65,10 @@ export default {
     text-transform: capitalize;
     padding: 10px;
 
-    background: var(--card-light-gray);
+    background: var(--card-white);
     border: 3px solid var(--card-dark-blue);
     border-radius: 8px;
+    box-shadow: 0 10px 6px -6px var(--card-black);
 
     width: 150px;
 
@@ -75,6 +76,8 @@ export default {
       display: flex;
       flex-direction: row;
       justify-content: center;
+      background: var(--card-gray);
+      border-radius: 8px;
 
       img {
         width: 80px;
@@ -85,7 +88,7 @@ export default {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      margin-top: 4px;
+      margin-top: 8px;
 
       p {
         padding: 0;

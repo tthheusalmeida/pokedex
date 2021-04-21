@@ -29,7 +29,9 @@ export default {
     --pokelogo-blue: #2468B1;
 
     --card-dark-blue: #003a70;
-    --card-light-gray: #E8E8E8;
+    --card-white: #FFFFFF;
+    --card-gray: #E9E9E9;
+    --card-black: #000000;
 
   }
 
