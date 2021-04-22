@@ -1,7 +1,7 @@
 <template>
   <div class="list">
-    <div class="pokemon" v-for="(pokemon, index) in pokemons" :key="index">
-      <PokeCard
+    <div class="pokemon" v-for="(pokemon, index) in pokemons[0]" :key="index">
+      <PokeCard v-if="pokemon.id"
         :id="getPokemonId(pokemon)"
         :name="getPokemonName(pokemon)"
         :types="getPokemonTypes(pokemon)"
@@ -30,13 +30,14 @@ export default {
   },
   methods: {
     async getPokemonData() {
-      const pokemon1 = await fetchData(1);
-      const pokemon2 = await fetchData(4);
-      const pokemon3 = await fetchData(7);
-      console.log('pokemon: ', pokemon1);
-      this.pokemons.push(pokemon1);
-      this.pokemons.push(pokemon2);
-      this.pokemons.push(pokemon3);
+      // eslint-disable-next-line no-var
+      var pokemonsRequest = [];
+      for (let index = 1; index < 152; index += 1) {
+        pokemonsRequest.push(fetchData(index));
+      }
+
+      await Promise.all(pokemonsRequest)
+        .then((value) => this.pokemons.push(value));
     },
     getPokemonId(pokemon) {
       const { id } = pokemon;

@@ -19,6 +19,7 @@
       <ul>
         <li
           class="type"
+          :style="getTypeStyle(type)"
           v-for="(type, index) in types" :key="index"
         >
           {{ type }}
@@ -47,6 +48,14 @@ export default {
     img: {
       type: String,
       required: true,
+    },
+  },
+  methods: {
+    getTypeStyle(type) {
+      return `
+        color: var(--${type}-type);
+        background: var(--background-${type}-type);
+      `;
     },
   },
 };
