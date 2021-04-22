@@ -1,11 +1,11 @@
 <template>
   <div class="list">
-    <div class="pokemon" v-for="pokemon in pokemons" :key="pokemon.id">
+    <div class="pokemon" v-for="(pokemon, index) in pokemons" :key="index">
       <PokeCard
-        :id="pokemon.id"
-        :name="pokemon.name"
-        :types="pokemon.type"
-        :img="pokemon.img"
+        :id="getPokemonId(pokemon)"
+        :name="getPokemonName(pokemon)"
+        :types="getPokemonTypes(pokemon)"
+        :img="getPokemonImg(pokemon)"
       />
     </div>
   </div>
@@ -22,27 +22,7 @@ export default {
   },
   data() {
     return {
-      pokemons: [
-        {
-          id: 1,
-          name: 'bulbasaur',
-          type: ['grass', 'poison'],
-          img: 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png',
-        },
-        {
-          id: 4,
-          name: 'charmander',
-          type: ['fire'],
-          img: 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/004.png',
-        },
-        {
-          id: 7,
-          name: 'squirtle',
-          type: ['water'],
-          img: 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/007.png',
-        },
-      ],
-      pokemonsData: [],
+      pokemons: [],
     };
   },
   created() {
@@ -53,9 +33,24 @@ export default {
       const pokemon1 = await fetchData(1);
       const pokemon2 = await fetchData(4);
       const pokemon3 = await fetchData(7);
-      this.pokemonsData.push(pokemon1);
-      this.pokemonsData.push(pokemon2);
-      this.pokemonsData.push(pokemon3);
+      console.log('pokemon: ', pokemon1);
+      this.pokemons.push(pokemon1);
+      this.pokemons.push(pokemon2);
+      this.pokemons.push(pokemon3);
+    },
+    getPokemonId(pokemon) {
+      const { id } = pokemon;
+      const zero = 3 - id.toString().length + 1;
+      return Array(+(zero > 0 && zero)).join('0') + id;
+    },
+    getPokemonName(pokemon) {
+      return pokemon.name;
+    },
+    getPokemonTypes(pokemon) {
+      return pokemon.types.map((types) => types.type.name);
+    },
+    getPokemonImg(pokemon) {
+      return `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${this.getPokemonId(pokemon)}.png`;
     },
   },
 };

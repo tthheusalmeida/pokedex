@@ -8,7 +8,7 @@
     </div>
 
     <div class="card_information">
-      <p>n°{{ zeroPad(id) }}</p>
+      <p>n°{{ id }}</p>
       <p>{{ name }}</p>
     </div>
 
@@ -33,7 +33,7 @@ export default {
   name: 'PokeCard',
   props: {
     id: {
-      type: Number,
+      type: String,
       required: true,
     },
     name: {
@@ -47,12 +47,6 @@ export default {
     img: {
       type: String,
       required: true,
-    },
-  },
-  methods: {
-    zeroPad(id) {
-      const zero = 3 - id.toString().length + 1;
-      return Array(+(zero > 0 && zero)).join('0') + id;
     },
   },
 };
