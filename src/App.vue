@@ -107,7 +107,7 @@ export default {
     flex-direction: column;
     align-items: center;
     padding: 10px;
-    width: calc(100vw - 20px);
+    width: calc(100vw - 40px);
     min-height: calc(100vh - 20px);
 
     background: var(--darker-ruby-red);
