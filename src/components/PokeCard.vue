@@ -70,9 +70,8 @@ export default {
     width: 150px;
 
     background: var(--card-white);
-    border: 3px solid var(--card-dark-blue);
     border-radius: 8px;
-    box-shadow: 0 10px 6px -6px var(--card-black);
+    box-shadow: var(--card-black) 0px 10px 15px -5px;
 
     transition: all 0.2s ease;
 
@@ -82,9 +81,10 @@ export default {
       justify-content: center;
       background: var(--card-gray);
       border-radius: 8px;
+      min-width: 130px;
 
       img {
-        width: 80px;
+        width: 130px;
       }
     }
 

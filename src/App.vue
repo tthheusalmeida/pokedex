@@ -67,7 +67,8 @@ export default {
     --background-ghost-type: #7b62a3;
     --dragon-type: #FFFFFF;
     --background-dragon-type: linear-gradient(180deg, #53a4cf 50%, #f16e57 50%);
-
+    --dark-type: #FFFFFF;
+    --background-dark-type: #707070;
   }
 
   body {
