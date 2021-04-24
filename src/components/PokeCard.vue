@@ -78,7 +78,6 @@ export default {
     padding: 10px;
     width: 150px;
 
-    background: var(--card-white);
     border-radius: 8px;
     box-shadow: var(--card-black) 0px 10px 15px -5px;
 
