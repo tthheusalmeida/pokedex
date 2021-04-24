@@ -34,7 +34,7 @@ export default {
     flex-direction: row;
     justify-content: center;
 
-    font-size: 3rem;
+    font-size: 4rem;
     color: var(--pokelogo-yellow);
     text-shadow:
       -5px 0 var(--pokelogo-blue),
