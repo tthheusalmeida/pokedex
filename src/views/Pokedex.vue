@@ -4,26 +4,25 @@
       Pokédex
     </h1>
 
-    <PokeList
-      v-if="requestStatus"
+    <PokeList v-if="requestStatus"
       :pokemons="pokemons"
       :request-status="requestStatus"
     />
+    <Loading v-else />
 
-    <div v-else >
-      <h1 class="title" >Loading...</h1>
-    </div>
   </div>
 </template>
 
 <script>
 import PokeList from '@/components/PokeList.vue';
 import { fetchPokemonData } from '@/services/PokeApi';
+import Loading from '@/components/Loading.vue';
 
 export default {
   name: 'Pokedex',
   components: {
     PokeList,
+    Loading,
   },
   data() {
     return {
@@ -46,7 +45,6 @@ export default {
       await Promise.all(pokemonsRequest)
         .then((value) => this.pokemons.push(value));
       this.pokemons = this.pokemons.shift();
-
       this.requestStatus = true;
     },
   },

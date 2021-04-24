@@ -88,14 +88,10 @@ export default {
     flex-direction: column;
     align-items: center;
     padding: 10px;
-    width: calc(100%);
+    width: calc(100vw - 20px);
     min-height: calc(100vh - 20px);
 
-    background: radial-gradient(
-      var(--lighter-ruby-red),
-      var(--darker-ruby-red),
-      var(--darkest-ruby-red),
-    );
+    background: var(--darker-ruby-red);
   }
 
 </style>
