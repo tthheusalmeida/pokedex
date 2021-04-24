@@ -4,17 +4,51 @@
       Pokédex
     </h1>
 
-    <PokeList />
+    <PokeList
+      v-if="requestStatus"
+      :pokemons="pokemons"
+      :request-status="requestStatus"
+    />
+
+    <div v-else >
+      <h1 class="title" >Loading...</h1>
+    </div>
   </div>
 </template>
 
 <script>
 import PokeList from '@/components/PokeList.vue';
+import { fetchPokemonData } from '@/services/PokeApi';
 
 export default {
   name: 'Pokedex',
   components: {
     PokeList,
+  },
+  data() {
+    return {
+      pokemons: [],
+      requestStatus: false,
+    };
+  },
+  created() {
+    this.getPokemonData();
+  },
+  methods: {
+    async getPokemonData() {
+      // eslint-disable-next-line no-var
+      var pokemonsRequest = [];
+      this.requestStatus = false;
+      for (let index = 1; index < 152; index += 1) {
+        pokemonsRequest.push(fetchPokemonData(index));
+      }
+
+      await Promise.all(pokemonsRequest)
+        .then((value) => this.pokemons.push(value));
+      this.pokemons = this.pokemons.shift();
+
+      this.requestStatus = true;
+    },
   },
 };
 </script>

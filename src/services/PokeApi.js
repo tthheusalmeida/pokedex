@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // eslint-disable-next-line import/prefer-default-export
-export async function fetchData(id) {
+export async function fetchPokemonData(id) {
   const baseURL = `https://pokeapi.co/api/v2/pokemon/${id}`;
   // eslint-disable-next-line no-var
   var data = {};
