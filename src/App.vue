@@ -20,7 +20,7 @@ export default {
   @import url('https://fonts.googleapis.com/css?family=Acme');
 
   :root {
-    --darkest-ruby-red: #9A2617;
+    --darkest-ruby-red: #7e2013;
     --darker-ruby-red: #AD2A1A;
     --ruby-red: #C02F1D;
     --lighter-ruby-red: #CD594A;
@@ -106,11 +106,10 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 10px;
-    width: calc(100vw - 40px);
+    width: calc(100vw - 20px);
     min-height: calc(100vh - 20px);
 
-    background: var(--darker-ruby-red);
+    background: var(--ruby-red);
   }
 
 </style>

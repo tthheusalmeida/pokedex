@@ -1,8 +1,12 @@
 <template>
   <div class="container">
-    <h1 class="title">
-      Pokédex
-    </h1>
+    <div class="pokedex">
+      <div class="pokedex_big-ball">
+        <div class="pokedex_big-ball-outer">
+          <div class="pokedex_big-ball-inner"></div>
+        </div>
+      </div>
+    </div>
 
     <PokeList v-if="requestStatus"
       :pokemons="pokemons"
@@ -61,18 +65,36 @@ export default {
     }
   }
 
-  .title {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+  .pokedex {
+    height: 220px;
+    width: calc(100vw - 20px);
+    border-bottom: solid 2px var(--card-black);
+    margin-bottom: 10px;
+    padding: 0;
+    background: var(--darkest-ruby-red);
 
-    font-size: 4rem;
-    color: var(--pokelogo-yellow);
-    text-shadow:
-      -5px 0 var(--pokelogo-blue),
-      0 5px var(--pokelogo-blue),
-      5px 0 var(--pokelogo-blue),
-      0 -5px var(--pokelogo-blue);
+    &_big-ball-outer {
+      height: 170px;
+      width: 170px;
+      position: absolute;
+      top: 25px;
+      left: 40px;
+      border-radius: 100%;
+      background: var(--card-white);
+      box-shadow: var(--card-black) 0px 0px 20px;
+    }
+
+    &_big-ball-inner {
+      height: 150px;
+      width: 150px;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      border-radius: 100%;
+      background: var(--background-ice-type-2);
+      box-shadow: var(--pokelogo-blue) 0px -80px 60px 10px inset,
+                var(--pokelogo-blue) 0px 8px 20px 10px inset;
+    }
   }
 
 </style>
