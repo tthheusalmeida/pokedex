@@ -1,5 +1,8 @@
 <template>
-  <div class="card">
+  <div
+    class="card"
+    :style="getCardBackgroundColor(types[0])"
+  >
     <div class="card_img">
       <img
       :src="img"
@@ -7,24 +10,22 @@
     >
     </div>
 
-    <div class="card_information">
+    <div class="card_id">
       <p>n°{{ id }}</p>
+    </div>
+
+    <div class="card_name">
       <p>{{ name }}</p>
     </div>
 
     <div class="card_types">
-      <div>
-        type:
-      </div>
-      <ul>
-        <li
+      <div
           class="type"
           :style="getTypeStyle(type)"
           v-for="(type, index) in types" :key="index"
         >
           {{ type }}
-        </li>
-      </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -57,6 +58,14 @@ export default {
         background: var(--background-${type}-type);
       `;
     },
+    getCardBackgroundColor(type) {
+      if (type) {
+        return `
+          background: var(--background-${type}-type-2);
+        `;
+      }
+      return 'background: var(--card-white);';
+    },
   },
 };
 
@@ -80,7 +89,7 @@ export default {
       flex-direction: row;
       justify-content: center;
       background: var(--card-gray);
-      border-radius: 8px;
+      border-radius: 100%;
       min-width: 130px;
 
       img {
@@ -88,31 +97,43 @@ export default {
       }
     }
 
-    &_information {
+    &_id {
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
+      justify-content: center;
       margin-top: 8px;
 
       p {
-        padding: 0;
+        padding: 1px 6px;
+        margin: 0px;
+        border-radius: 8px;
+        background: var(--card-gray);
+      }
+    }
+
+    &_name {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      margin-top: 8px;
+
+      p {
+        font-size: 16px;
+        font-weight: bold;
+        padding-bottom: 4px;
         margin: 0;
       }
     }
 
     &_types {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: calc(5vmin + 2px);
       margin-top: 4px;
 
-      ul {
-        list-style-type:none;
-      }
-
       .type {
+        text-align: center;
         display: inline;
-        margin-left: 8px;
         color: white;
         background: magenta;
         border-radius: 5px;

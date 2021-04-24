@@ -69,6 +69,25 @@ export default {
     --background-dragon-type: linear-gradient(180deg, #53a4cf 50%, #f16e57 50%);
     --dark-type: #FFFFFF;
     --background-dark-type: #707070;
+
+    --background-grass-type-2: #819760;
+    --background-poison-type-2: #937f99;
+    --background-fire-type-2: #db9d71;
+    --background-water-type-2: #7daece;;
+    --background-flying-type-2: linear-gradient(180deg, #8ee6ff 50%, #ffe6e0 50%);
+    --background-bug-type-2: #97b96f;
+    --background-normal-type-2: #baccd3;
+    --background-electric-type-2: #cfc790;
+    --background-ground-type-2: linear-gradient(180deg, #d4cc92 50%, rgb(185, 176, 133) 50%);
+    --background-fairy-type-2: #c08cb0;
+    --background-fighting-type-2: #f8b58c;
+    --background-psychic-type-2: #dd9dc2;
+    --background-rock-type-2: #c2b474;
+    --background-steel-type-2: #daeff0;
+    --background-ice-type-2: #b0edff;
+    --background-ghost-type-2: #d0bfeb;
+    --background-dragon-type-2: linear-gradient(180deg, #99bacc 50%, #bb9a95 50%);
+    --background-dark-type-2: #b3b3b3;
   }
 
   body {
