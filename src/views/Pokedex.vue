@@ -1,12 +1,6 @@
 <template>
   <div class="container">
-    <div class="pokedex">
-      <div class="pokedex_big-ball">
-        <div class="pokedex_big-ball-outer">
-          <div class="pokedex_big-ball-inner"></div>
-        </div>
-      </div>
-    </div>
+    <PokedexHeader />
 
     <PokeList v-if="requestStatus"
       :pokemons="pokemons"
@@ -18,13 +12,15 @@
 </template>
 
 <script>
+import PokedexHeader from '@/components/PokedexHeader.vue';
 import PokeList from '@/components/PokeList.vue';
-import { fetchPokemonData } from '@/services/PokeApi';
 import Loading from '@/components/Loading.vue';
+import { fetchPokemonData } from '@/services/PokeApi';
 
 export default {
   name: 'Pokedex',
   components: {
+    PokedexHeader,
     PokeList,
     Loading,
   },
@@ -62,38 +58,6 @@ export default {
     ul {
       margin: 0;
       padding: 0;
-    }
-  }
-
-  .pokedex {
-    height: 220px;
-    width: calc(100vw - 20px);
-    border-bottom: solid 2px var(--card-black);
-    margin-bottom: 10px;
-    padding: 0;
-    background: var(--darkest-ruby-red);
-
-    &_big-ball-outer {
-      height: 170px;
-      width: 170px;
-      position: absolute;
-      top: 25px;
-      left: 40px;
-      border-radius: 100%;
-      background: var(--card-white);
-      box-shadow: var(--card-black) 0px 0px 20px;
-    }
-
-    &_big-ball-inner {
-      height: 150px;
-      width: 150px;
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      border-radius: 100%;
-      background: var(--background-ice-type-2);
-      box-shadow: var(--pokelogo-blue) 0px -80px 60px 10px inset,
-                var(--pokelogo-blue) 0px 8px 20px 10px inset;
     }
   }
 
