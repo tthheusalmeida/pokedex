@@ -103,6 +103,7 @@ export default {
   #app {
     font-size: 1rem;
     font-weight: normal;
+    font-family: 'Acme', arial;
 
     display: flex;
     flex-direction: column;

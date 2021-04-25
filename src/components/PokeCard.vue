@@ -3,35 +3,44 @@
     class="card"
     :style="getCardBackgroundColor(types[0])"
   >
-    <div class="card_img">
-      <img
-      :src="img"
-      :alt="name"
-    >
-    </div>
+    <div v-if="isThereData">
+      <div class="card_img">
+        <img
+        :src="img"
+        :alt="name"
+      >
+      </div>
 
-    <div class="card_id">
-      n°{{ id }}
-    </div>
+      <div class="card_id">
+        n°{{ id }}
+      </div>
 
-    <div class="card_name">
-      {{ name }}
-    </div>
+      <div class="card_name">
+        {{ name }}
+      </div>
 
-    <div class="card_types">
-      <div
-          class="type"
-          :style="getTypeStyle(type)"
-          v-for="(type, index) in types" :key="index"
-        >
-          {{ type }}
+      <div class="card_types">
+        <div
+            class="type"
+            :style="getTypeStyle(type)"
+            v-for="(type, index) in types" :key="index"
+          >
+            {{ type }}
+        </div>
       </div>
     </div>
+
+    <Loading v-else/>
   </div>
 </template>
 
 <script>
+import Loading from '@/components/Loading.vue';
+
 export default {
+  components: {
+    Loading,
+  },
   name: 'PokeCard',
   props: {
     id: {
@@ -49,6 +58,11 @@ export default {
     img: {
       type: String,
       required: true,
+    },
+  },
+  computed: {
+    isThereData() {
+      return this.id && this.name && this.types && this.img;
     },
   },
   methods: {
@@ -77,7 +91,6 @@ export default {
     flex-direction: column;
     align-content: center;
 
-    font-family: 'Acme', arial;
     font-size: 0.8rem;
     text-transform: capitalize;
     padding: 10px;
@@ -101,12 +114,10 @@ export default {
 
     &_id, &_name {
       text-align: center;
-      align-self: center;
     }
 
     &_id {
-      margin-top: 5px;
-      width: 50px;
+      margin: 5px 42px 5px;
       padding: 1px 6px;
       border-radius: 8px;
       background: var(--card-gray);

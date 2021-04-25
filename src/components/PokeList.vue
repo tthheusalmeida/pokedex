@@ -51,6 +51,7 @@ export default {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    padding-right: 15px;
   }
 
   .pokemon {
