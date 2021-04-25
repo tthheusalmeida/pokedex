@@ -8,6 +8,7 @@
     />
     <Loading v-else />
 
+    <PokeDetails />
   </div>
 </template>
 
@@ -15,6 +16,7 @@
 import PokedexHeader from '@/components/PokedexHeader.vue';
 import PokeList from '@/components/PokeList.vue';
 import Loading from '@/components/Loading.vue';
+import PokeDetails from '@/components/PokeDetails.vue';
 import { fetchPokemonData } from '@/services/PokeApi';
 
 export default {
@@ -23,6 +25,7 @@ export default {
     PokedexHeader,
     PokeList,
     Loading,
+    PokeDetails,
   },
   data() {
     return {

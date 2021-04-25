@@ -111,6 +111,7 @@ export default {
     }
 
     &_name {
+      font-family: 'Acme', arial;
       display: flex;
       flex-direction: row;
       justify-content: center;

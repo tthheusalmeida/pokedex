@@ -21,7 +21,7 @@
         </v-card-title>
 
         <v-card-text>
-          Lorem ipsum dolor sit amet, consectet
+          Lorem ipsum dolor sit amet, consectetur
         </v-card-text>
 
         <v-divider></v-divider>
@@ -43,15 +43,10 @@
 
 <script>
 export default {
-  name: 'PokeDetails',
   data() {
     return {
-      dialog: true,
+      dialog: false,
     };
   },
 };
 </script>
-
-<style>
-
-</style>

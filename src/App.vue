@@ -1,7 +1,9 @@
 <template>
-  <div id="app">
-    <Pokedex />
-  </div>
+  <v-app>
+    <div id="app">
+      <Pokedex />
+    </div>
+  </v-app>
 </template>
 
 <script>
@@ -99,7 +101,6 @@ export default {
   }
 
   #app {
-    font-family: 'Acme', arial;
     font-size: 1rem;
     font-weight: normal;
 
