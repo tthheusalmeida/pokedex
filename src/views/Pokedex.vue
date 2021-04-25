@@ -57,7 +57,8 @@ export default {
 <style lang="scss">
   .container {
     min-width: calc(90vw);
-    margin: 0;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
 </style>
