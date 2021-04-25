@@ -107,8 +107,8 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: calc(100vw - 20px);
-    min-height: calc(100vh - 20px);
+    width: 100vw;
+    min-height: 100vh;
 
     background: var(--ruby-red);
   }

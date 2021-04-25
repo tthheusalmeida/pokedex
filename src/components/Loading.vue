@@ -22,7 +22,7 @@ export default {
     align-content: center;
     justify-content: center;
 
-    width: calc(100vw - 20px);
+    width: calc(100vw);
   }
 
   .loading-dots {
