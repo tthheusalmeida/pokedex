@@ -28,10 +28,8 @@ export default {
   .loading-dots {
     text-align: center;
     justify-content: center;
-    width: 100%;
 
     padding: 10px;
-    width: 50px;
 
     &__dot {
       animation: dot-keyframes 1.5s infinite ease-in-out;
