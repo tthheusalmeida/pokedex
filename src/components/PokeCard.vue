@@ -4,7 +4,10 @@
     :style="getCardBackgroundColor(types[0])"
   >
     <div v-if="isThereData">
-      <div class="card_img">
+      <div
+        class="card_img"
+        :style="getImgStyle(types[0])"
+      >
         <img
         :src="img"
         :alt="name"
@@ -84,6 +87,32 @@ export default {
         color: var(--${type}-type);
         background: var(--background-${type}-type);
       `;
+    },
+    getImgStyle(type) {
+      let newType = type;
+
+      const typesWithMoreColors = [
+        {
+          type: 'flying',
+          changeFor: 'water',
+        },
+        {
+          type: 'ground',
+          changeFor: 'electric',
+        },
+        {
+          type: 'dragon',
+          changeFor: 'ice',
+        },
+      ];
+
+      const isMoreThenOneColor = typesWithMoreColors
+        .filter((elem) => elem.type === type).shift();
+
+      if (isMoreThenOneColor) {
+        newType = isMoreThenOneColor.changeFor;
+      }
+      return `border: 2px solid var(--background-${newType}-type);`;
     },
   },
 };
