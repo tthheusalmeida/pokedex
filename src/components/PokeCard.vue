@@ -36,6 +36,7 @@
 
 <script>
 import Loading from '@/components/Loading.vue';
+import { getHexColorFromRoot } from '@/utils/color';
 
 export default {
   components: {
@@ -66,19 +67,23 @@ export default {
     },
   },
   methods: {
+    getCardBackgroundColor(type) {
+      if (type) {
+        const color = getHexColorFromRoot({
+          type,
+          isBackground: true,
+          lighten: 32,
+        });
+
+        return `background: ${color};`;
+      }
+      return 'background: var(--card-white);';
+    },
     getTypeStyle(type) {
       return `
         color: var(--${type}-type);
         background: var(--background-${type}-type);
       `;
-    },
-    getCardBackgroundColor(type) {
-      if (type) {
-        return `
-          background: var(--background-${type}-type-2);
-        `;
-      }
-      return 'background: var(--card-white);';
     },
   },
 };
@@ -93,7 +98,7 @@ export default {
 
     font-size: 0.8rem;
     text-transform: capitalize;
-    padding: 10px;
+    padding: 8px;
     width: 150px;
 
     border-radius: 8px;
@@ -130,9 +135,9 @@ export default {
     }
 
     &_types {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: calc(5vmin + 2px);
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
 
       .type {
         text-align: center;

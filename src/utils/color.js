@@ -1,0 +1,67 @@
+/* eslint-disable no-var */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-bitwise */
+// eslint-disable-next-line import/prefer-default-export
+
+export function lightenHexColor(col, amt) {
+  let usePound = false;
+
+  if (col[0] === '#') {
+    col = col.slice(1);
+    usePound = true;
+  }
+
+  const num = parseInt(col, 16);
+  let r = (num >> 16) + amt;
+
+  if (r > 255) r = 255;
+  else if (r < 0) r = 0;
+
+  let b = ((num >> 8) & 0x00FF) + amt;
+
+  if (b > 255) b = 255;
+  else if (b < 0) b = 0;
+
+  let g = (num & 0x0000FF) + amt;
+
+  if (g > 255) g = 255;
+  else if (g < 0) g = 0;
+
+  return (usePound ? '#' : '') + (g | (b << 8) | (r << 16)).toString(16);
+}
+
+export function getHexColorFromRoot(options) {
+  const {
+    type,
+    isBackground,
+    lighten,
+  } = options;
+  var colors = [];
+
+  const definedColor = isBackground
+    ? `--background-${type}-type`
+    : `--${type}-type`;
+
+  const rootColor = getComputedStyle(document.documentElement)
+    .getPropertyValue(definedColor)
+    .trim();
+
+  const isStandardColor = /^#[0-9a-f]{3,6}$/i;
+
+  if (rootColor.match(isStandardColor)) {
+    const color = lightenHexColor(rootColor, lighten);
+
+    colors.push(color);
+  } else {
+    const split = rootColor.split(' ');
+
+    split[1] = lightenHexColor(split[1], lighten);
+    split[3] = lightenHexColor(split[3], lighten);
+
+    const color = split.join(' ');
+
+    colors.push(color);
+  }
+
+  return colors[0];
+}
