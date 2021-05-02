@@ -1,3 +1,4 @@
+/* eslint-disable vars-on-top */
 /* eslint-disable no-var */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-bitwise */
@@ -6,7 +7,7 @@
 export function lightenHexColor(col, amt) {
   let usePound = false;
 
-  if (col[0] === '#') {
+  if (col && col[0] === '#') {
     col = col.slice(1);
     usePound = true;
   }
@@ -36,7 +37,7 @@ export function getHexColorFromRoot(options) {
     isBackground,
     lighten,
   } = options;
-  var colors = [];
+  var colorFromRoot = '';
 
   const definedColor = isBackground
     ? `--background-${type}-type`
@@ -51,17 +52,17 @@ export function getHexColorFromRoot(options) {
   if (rootColor.match(isStandardColor)) {
     const color = lightenHexColor(rootColor, lighten);
 
-    colors.push(color);
+    colorFromRoot = color;
   } else {
-    const split = rootColor.split(' ');
+    var split = rootColor.split(' ');
 
     split[1] = lightenHexColor(split[1], lighten);
     split[3] = lightenHexColor(split[3], lighten);
 
     const color = split.join(' ');
 
-    colors.push(color);
+    colorFromRoot = color;
   }
 
-  return colors[0];
+  return colorFromRoot;
 }
