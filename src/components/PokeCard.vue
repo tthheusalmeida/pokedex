@@ -5,17 +5,20 @@
   >
     <div v-if="isThereData">
       <div
-        class="card_img"
-        :style="getImgStyle(types[0])"
+        class="card_id"
+        :style="getBorderStyle(types[0])"
       >
-        <img
-        :src="img"
-        :alt="name"
-      >
+        n°{{ id }}
       </div>
 
-      <div class="card_id">
-        n°{{ id }}
+      <div
+        class="card_img"
+        :style="getBorderStyle(types[0])"
+      >
+        <img
+          :src="img"
+          :alt="name"
+        >
       </div>
 
       <div class="card_name">
@@ -88,7 +91,7 @@ export default {
         background: var(--background-${type}-type);
       `;
     },
-    getImgStyle(type) {
+    getBorderStyle(type) {
       let newType = type;
 
       const typesWithMoreColors = [
@@ -127,6 +130,7 @@ export default {
 
     font-size: 0.8rem;
     text-transform: capitalize;
+    line-height: 1;
     padding: 8px;
     width: 150px;
 
@@ -152,15 +156,16 @@ export default {
 
     &_id {
       margin: 5px 42px 5px;
-      padding: 1px 6px;
+      padding: 3px 6px;
       border-radius: 8px;
+      align-content: flex-start;
       background: var(--card-gray);
     }
 
     &_name {
       font-size: 16px;
       font-weight: bold;
-      margin: 3px 0;
+      margin: 8px 0 6px 0;
     }
 
     &_types {
@@ -172,7 +177,7 @@ export default {
         text-align: center;
         display: inline;
         border-radius: 5px;
-        padding: 2px 5px;
+        padding: 4px 8px;
       }
     }
   }
