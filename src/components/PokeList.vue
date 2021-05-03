@@ -1,6 +1,6 @@
 <template>
   <div class="list">
-    <div class="pokemon" v-for="(pokemon, index) in pokemons" :key="index">
+    <div class="pokemon" v-for="(pokemon, index) in getPokemons" :key="index">
       <PokeCard
         :id="getPokemonId(pokemon)"
         :name="getPokemonName(pokemon)"
@@ -13,17 +13,17 @@
 
 <script>
 import PokeCard from '@/components/PokeCard.vue';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'PokeList',
   components: {
     PokeCard,
   },
-  props: {
-    pokemons: {
-      type: Array,
-      require: true,
-    },
+  computed: {
+    ...mapGetters('pokemon', [
+      'getPokemons',
+    ]),
   },
   methods: {
     getPokemonId(pokemon) {

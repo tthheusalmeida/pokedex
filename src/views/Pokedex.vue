@@ -2,10 +2,8 @@
   <div class="container">
     <PokedexHeader />
 
-    <PokeList v-if="requestStatus"
-      :pokemons="pokemons"
-      :request-status="requestStatus"
-    />
+    <PokeList v-if="requestStatus" />
+
     <Loading v-else />
 
     <PokeDetails />
@@ -17,7 +15,7 @@ import PokedexHeader from '@/components/PokedexHeader.vue';
 import PokeList from '@/components/PokeList.vue';
 import Loading from '@/components/Loading.vue';
 import PokeDetails from '@/components/PokeDetails.vue';
-import { fetchPokemonData } from '@/services/PokeApi';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'Pokedex',
@@ -27,29 +25,21 @@ export default {
     Loading,
     PokeDetails,
   },
-  data() {
-    return {
-      pokemons: [],
-      requestStatus: false,
-    };
-  },
   created() {
-    this.getPokemonData();
+    this.fetchPokemonsData();
+  },
+  computed: {
+    ...mapGetters('pokemon', [
+      'getRequestStatus',
+    ]),
+    requestStatus() {
+      return this.getRequestStatus;
+    },
   },
   methods: {
-    async getPokemonData() {
-      // eslint-disable-next-line no-var
-      var pokemonsRequest = [];
-      this.requestStatus = false;
-      for (let index = 1; index < 152; index += 1) {
-        pokemonsRequest.push(fetchPokemonData(index));
-      }
-
-      await Promise.all(pokemonsRequest)
-        .then((value) => this.pokemons.push(value));
-      this.pokemons = this.pokemons.shift();
-      this.requestStatus = true;
-    },
+    ...mapActions('pokemon', [
+      'fetchPokemonsData',
+    ]),
   },
 };
 </script>
