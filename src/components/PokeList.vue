@@ -21,6 +21,8 @@
 <script>
 import PokeCard from '@/components/PokeCard.vue';
 import Loading from '@/components/Loading.vue';
+import { addZerosToNumber } from '@/utils/formatter';
+import { getImg } from '@/utils/img';
 import { mapGetters } from 'vuex';
 
 export default {
@@ -40,9 +42,7 @@ export default {
   },
   methods: {
     getPokemonId(pokemon) {
-      const { id } = pokemon;
-      const zero = 3 - id.toString().length + 1;
-      return Array(+(zero > 0 && zero)).join('0') + id;
+      return addZerosToNumber(pokemon);
     },
     getPokemonName(pokemon) {
       return pokemon.name;
@@ -51,7 +51,7 @@ export default {
       return pokemon.types.map((types) => types.type.name);
     },
     getPokemonImg(pokemon) {
-      return `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${this.getPokemonId(pokemon)}.png`;
+      return getImg(this.getPokemonId(pokemon));
     },
   },
 };

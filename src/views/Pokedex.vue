@@ -2,8 +2,8 @@
   <div class="container">
     <PokedexHeader />
 
-    <PokeList />
-    <PokeDetails />
+    <PokeList v-if="showList"/>
+    <PokeDetails v-else-if="showDetails"/>
   </div>
 </template>
 
@@ -11,7 +11,7 @@
 import PokedexHeader from '@/components/PokedexHeader.vue';
 import PokeList from '@/components/PokeList.vue';
 import PokeDetails from '@/components/PokeDetails.vue';
-import { mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'Pokedex',
@@ -22,6 +22,17 @@ export default {
   },
   created() {
     this.fetchPokemonsData();
+  },
+  computed: {
+    ...mapGetters('card', [
+      'getDetails',
+    ]),
+    showList() {
+      return !this.getDetails;
+    },
+    showDetails() {
+      return this.getDetails;
+    },
   },
   methods: {
     ...mapActions('pokemon', [
@@ -36,6 +47,10 @@ export default {
     min-width: 100vw;
     margin: 0 !important;
     padding: 0 !important;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
 </style>
