@@ -67,7 +67,7 @@ export default {
         position: absolute;
         left: 400px;
         border-radius: 100%;
-        box-shadow: var(--background-grass-type-2) 0px -10px 10px 1px inset,
+        box-shadow: var(--background-bug-type) 0px -10px 10px 1px inset,
                     var(--background-grass-type) 0px 10px 35px 5px inset;
         }
     }
