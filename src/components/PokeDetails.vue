@@ -128,7 +128,6 @@ export default {
     ]),
     closePokemonDetails() {
       this.toggleDetails();
-      console.log('pokemon: ', this.pokemon);
       this.setPokemonDetails({});
     },
     getTypeStyle(type) {
