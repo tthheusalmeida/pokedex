@@ -1,29 +1,42 @@
 <template>
-  <div class="list">
-    <div class="pokemon" v-for="(pokemon, index) in getPokemons" :key="index">
-      <PokeCard
-        :id="getPokemonId(pokemon)"
-        :name="getPokemonName(pokemon)"
-        :types="getPokemonTypes(pokemon)"
-        :img="getPokemonImg(pokemon)"
-      />
+  <div>
+    <div
+      v-if="getRequestStatus"
+      class="list"
+    >
+      <div class="pokemon" v-for="(pokemon, index) in getPokemons" :key="index">
+        <PokeCard
+          :id="getPokemonId(pokemon)"
+          :name="getPokemonName(pokemon)"
+          :types="getPokemonTypes(pokemon)"
+          :img="getPokemonImg(pokemon)"
+        />
+      </div>
     </div>
+
+    <Loading v-else />
   </div>
 </template>
 
 <script>
 import PokeCard from '@/components/PokeCard.vue';
+import Loading from '@/components/Loading.vue';
 import { mapGetters } from 'vuex';
 
 export default {
   name: 'PokeList',
   components: {
     PokeCard,
+    Loading,
   },
   computed: {
     ...mapGetters('pokemon', [
       'getPokemons',
+      'getRequestStatus',
     ]),
+    requestStatus() {
+      return this.getRequestStatus;
+    },
   },
   methods: {
     getPokemonId(pokemon) {
