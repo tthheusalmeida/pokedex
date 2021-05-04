@@ -35,12 +35,22 @@
             :src="getPokemonImg"
           ></v-img>
         </div>
+
+        <div class="details_display_types">
+          <div
+            class="details_display_types_single"
+            :style="getTypeStyle(type)"
+            v-for="(type) in getPokemonTypes" :key="type"
+          >
+            <span>{{ type }}</span>
+          </div>
+        </div>
       </div>
 
       <div class="d-flex flex-direction-row">
         <v-card-text>
           <div
-            class="d-flex justify-space-between text-capitalize"
+            class="d-flex justify-space-between"
             v-for="attribute in getPokemonAttributes" :key="attribute.name"
           >
             <span class="font-weight-bold">{{ attribute.name }}</span>
@@ -50,20 +60,11 @@
           <v-divider></v-divider>
 
           <div
-            class="d-flex justify-space-between text-capitalize"
+            class="d-flex justify-space-between"
             v-for="status in getPokemonStatus" :key="status.name"
           >
             <span class="font-weight-bold">{{ status.name }}</span>
             <span>{{ status.value }}</span>
-          </div>
-
-          <v-divider></v-divider>
-
-          <div
-            class="d-flex justify-space-between text-capitalize"
-            v-for="type in getPokemonTypes" :key="type"
-          >
-            <span >{{ type }}</span>
           </div>
         </v-card-text>
       </div>
@@ -130,35 +131,56 @@ export default {
       console.log('pokemon: ', this.pokemon);
       this.setPokemonDetails({});
     },
+    getTypeStyle(type) {
+      return `
+        color: var(--${type}-type);
+        background: var(--background-${type}-type);
+      `;
+    },
   },
 };
 </script>
 
 <style lang="scss">
   .details {
+    text-transform: capitalize;
+
     width: calc(100vw - 20px);
     padding-right: 20px;
-
-    &_header {
-    }
 
     &_display {
       padding: 0 60px 60px;
 
-      &_info {
+      &_info,
+      &_img,
+      &_types {
         display: flex;
-        justify-content: space-between;
-        text-transform: capitalize;
         background: var(--card-white);
-        border-radius: 8px 8px 0 0;
+      }
+
+      &_info {
+        justify-content: space-between;
+        border-radius: 3px 3px 0 0;
       }
 
       &_img {
-        display: flex;
         flex-direction: row;
         justify-content: center;
-        background: var(--card-white);
-        border-radius: 0 0 8px 8px;
+      }
+
+      &_types {
+        flex-direction: row;
+        justify-content: space-around;
+        border-radius: 0 0 3px 3px;
+
+        &_single {
+          text-align: center;
+          display: inline;
+          width: 100%;
+          padding: 4px 8px;
+          border-radius: 15px;
+          border: 10px solid var(--card-white);
+        }
       }
 
       &_buttons {
