@@ -1,10 +1,8 @@
 <template>
-  <div
-    class="details"
-  >
-    <v-card>
+  <div class="details">
+    <v-card class="rounded-lg">
       <v-card-actions
-        class="headline grey lighten-1"
+        class="details_header headline grey lighten-1"
       >
         <v-spacer></v-spacer>
         <v-btn
@@ -16,25 +14,30 @@
         </v-btn>
       </v-card-actions>
 
-      <v-card-title
-        class="d-flex justify-space-between text-capitalize"
-      >
-        <div class="details_id">
-          n°{{ getPokemonId }}
+      <div class="details_display grey lighten-1">
+        <v-card-title
+          class="details_display_info"
+        >
+          <h3 class="details_display_id">
+            n°{{ getPokemonId }}
+          </h3>
+          <h3 class="details_display_name">
+            {{ getPokemonName }}
+          </h3>
+        </v-card-title>
+
+        <v-divider class="grey lighten-1"></v-divider>
+
+        <div class="details_display_img">
+          <v-img
+            width="50vw"
+            max-width="350px"
+            :src="getPokemonImg"
+          ></v-img>
         </div>
-        <div class="details_name">
-          {{ getPokemonName }}
-        </div>
-      </v-card-title>
-      <v-divider></v-divider>
+      </div>
 
       <div class="d-flex flex-direction-row">
-        <v-img
-          width="60vw"
-          max-width="300px"
-          :src="getPokemonImg"
-        ></v-img>
-
         <v-card-text>
           <div
             class="d-flex justify-space-between text-capitalize"
@@ -135,5 +138,39 @@ export default {
   .details {
     width: calc(100vw - 20px);
     padding-right: 20px;
+
+    &_header {
+    }
+
+    &_display {
+      padding: 0 60px 60px;
+
+      &_info {
+        display: flex;
+        justify-content: space-between;
+        text-transform: capitalize;
+        background: var(--card-white);
+        border-radius: 8px 8px 0 0;
+      }
+
+      &_img {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        background: var(--card-white);
+        border-radius: 0 0 8px 8px;
+      }
+
+      &_buttons {
+
+      }
+    }
+
+    &_status {
+
+      &_buttons {
+
+      }
+    }
   }
 </style>
