@@ -51,7 +51,7 @@ export default {
       return pokemon.types.map((types) => types.type.name);
     },
     getPokemonImg(pokemon) {
-      return getImg(this.getPokemonId(pokemon));
+      return getImg(pokemon);
     },
   },
 };

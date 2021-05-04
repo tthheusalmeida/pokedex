@@ -98,7 +98,7 @@ export default {
       return this.pokemon.name;
     },
     getPokemonImg() {
-      return getImg(this.getPokemonId);
+      return getImg(this.pokemon);
     },
     getPokemonAttributes() {
       // eslint-disable-next-line prefer-const

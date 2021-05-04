@@ -1,4 +1,4 @@
 /* eslint-disable import/prefer-default-export */
-export function getImg(id) {
-  return `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${id}.png`;
+export function getImg(pokemon) {
+  return pokemon.sprites.other['official-artwork'].front_default;
 }
