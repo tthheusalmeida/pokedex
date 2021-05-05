@@ -47,6 +47,13 @@
         </div>
       </div>
 
+      <div class="details_stats">
+        <PolarChart
+          :categories="categories"
+          :series="series"
+        />
+      </div>
+
       <div class="d-flex flex-direction-row">
         <v-card-text>
           <div
@@ -56,16 +63,6 @@
             <span class="font-weight-bold">{{ attribute.name }}</span>
             <span>{{ attribute.value }}</span>
           </div>
-
-          <v-divider></v-divider>
-
-          <div
-            class="d-flex justify-space-between"
-            v-for="status in getPokemonStatus" :key="status.name"
-          >
-            <span class="font-weight-bold">{{ status.name }}</span>
-            <span>{{ status.value }}</span>
-          </div>
         </v-card-text>
       </div>
 
@@ -74,12 +71,16 @@
 </template>
 
 <script>
+import PolarChart from '@/components/PolarChart.vue';
 import { addZerosToNumber } from '@/utils/formatter';
 import { getImg } from '@/utils/img';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'PokeDetails',
+  components: {
+    PolarChart,
+  },
   computed: {
     ...mapGetters('card', [
       'getPokemonDetails',
@@ -110,15 +111,21 @@ export default {
 
       return attribute;
     },
-    getPokemonStatus() {
+    getPokemonsStats() {
       return this.pokemon.stats
         .map((stat) => ({
-          name: stat.stat.name,
-          value: stat.base_stat,
+          categorie: stat.stat.name,
+          serie: stat.base_stat,
         }));
     },
     getPokemonTypes() {
       return this.pokemon.types.map((types) => types.type.name);
+    },
+    categories() {
+      return this.getPokemonsStats.map((stat) => stat.categorie);
+    },
+    series() {
+      return this.getPokemonsStats.map((stat) => stat.serie);
     },
   },
   methods: {
@@ -181,17 +188,10 @@ export default {
           border: 10px solid var(--card-white);
         }
       }
-
-      &_buttons {
-
-      }
     }
 
-    &_status {
+    &_stats {
 
-      &_buttons {
-
-      }
     }
   }
 </style>
