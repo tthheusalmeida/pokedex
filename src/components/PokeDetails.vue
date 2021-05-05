@@ -1,72 +1,95 @@
 <template>
   <div class="details">
-    <v-card class="rounded-lg">
-      <v-card-actions
-        class="details_header headline grey lighten-1"
+    <v-card-actions
+      class="details_header headline grey lighten-1"
+    >
+      <v-spacer></v-spacer>
+      <v-btn
+        elevation="0"
+        color="red darken-4"
+        class="ma-2 white--text"
+        @click="closePokemonDetails"
       >
-        <v-spacer></v-spacer>
-        <v-btn
-          color="red darken-4"
-          class="ma-2 white--text"
-          @click="closePokemonDetails"
-        >
-          Back
-        </v-btn>
-      </v-card-actions>
+        Back
+      </v-btn>
+    </v-card-actions>
 
-      <div class="details_display grey lighten-1">
-        <v-card-title
-          class="details_display_info"
-        >
-          <h3 class="details_display_id">
-            n°{{ getPokemonId }}
-          </h3>
-          <h3 class="details_display_name">
-            {{ getPokemonName }}
-          </h3>
-        </v-card-title>
+    <div class="details_display grey lighten-1">
+      <v-card-title
+        class="details_display_info"
+      >
+        <h3 class="details_display_id">
+          n°{{ getPokemonId }}
+        </h3>
+        <h3 class="details_display_name">
+          {{ getPokemonName }}
+        </h3>
+      </v-card-title>
 
-        <v-divider class="grey lighten-1"></v-divider>
+      <v-divider class="grey lighten-1"></v-divider>
 
-        <div class="details_display_img">
-          <v-img
-            width="50vw"
-            max-width="350px"
-            :src="getPokemonImg"
-          ></v-img>
-        </div>
-
-        <div class="details_display_types">
-          <div
-            class="details_display_types_single"
-            :style="getTypeStyle(type)"
-            v-for="(type) in getPokemonTypes" :key="type"
-          >
-            <span>{{ type }}</span>
-          </div>
-        </div>
+      <div class="details_display_img">
+        <v-img
+          width="50vw"
+          max-width="350px"
+          :src="getPokemonImg"
+        ></v-img>
       </div>
 
-      <div class="details_stats">
+      <div class="details_display_types">
+        <div
+          class="details_display_types_single"
+          :style="getTypeStyle(type)"
+          v-for="(type) in getPokemonTypes" :key="type"
+        >
+          <span>{{ type }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="details_info">
+      <div
+        v-if="toogleInfo"
+        class="details_info_attributes"
+      >
         <PolarChart
-          :categories="categories"
-          :series="series"
+          :categories="attributeCategories"
+          :series="attributeSeries"
         />
       </div>
 
-      <div class="d-flex flex-direction-row">
-        <v-card-text>
-          <div
-            class="d-flex justify-space-between"
-            v-for="attribute in getPokemonAttributes" :key="attribute.name"
-          >
-            <span class="font-weight-bold">{{ attribute.name }}</span>
-            <span>{{ attribute.value }}</span>
-          </div>
-        </v-card-text>
+      <div
+        v-else
+        class="details_info_stats"
+      >
+        <PolarChart
+          :categories="statsCategories"
+          :series="statsSeries"
+        />
       </div>
 
-    </v-card>
+      <div class="details_info_buttons">
+        <v-btn
+          elevation="1"
+          class="grey darken-4"
+          @click="toggleDetailsInfo"
+        >
+          <v-icon color="white">
+            mdi-arrow-left
+          </v-icon>
+        </v-btn>
+
+        <v-btn
+          elevation="1"
+          class="grey darken-4"
+          @click="toggleDetailsInfo"
+        >
+          <v-icon color="white">
+            mdi-arrow-right
+          </v-icon>
+        </v-btn>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -80,6 +103,11 @@ export default {
   name: 'PokeDetails',
   components: {
     PolarChart,
+  },
+  data() {
+    return {
+      toogleInfo: false,
+    };
   },
   computed: {
     ...mapGetters('card', [
@@ -105,9 +133,9 @@ export default {
       // eslint-disable-next-line prefer-const
       let attribute = [];
 
-      attribute.push({ name: 'base experience', value: this.pokemon.base_experience });
-      attribute.push({ name: 'height', value: this.pokemon.height });
-      attribute.push({ name: 'weight', value: this.pokemon.weight });
+      attribute.push({ categorie: 'base experience', serie: this.pokemon.base_experience });
+      attribute.push({ categorie: 'height', serie: this.pokemon.height });
+      attribute.push({ categorie: 'weight', serie: this.pokemon.weight });
 
       return attribute;
     },
@@ -121,11 +149,17 @@ export default {
     getPokemonTypes() {
       return this.pokemon.types.map((types) => types.type.name);
     },
-    categories() {
+    statsCategories() {
       return this.getPokemonsStats.map((stat) => stat.categorie);
     },
-    series() {
+    statsSeries() {
       return this.getPokemonsStats.map((stat) => stat.serie);
+    },
+    attributeCategories() {
+      return this.getPokemonAttributes.map((attribute) => attribute.categorie);
+    },
+    attributeSeries() {
+      return this.getPokemonAttributes.map((attribute) => attribute.serie);
     },
   },
   methods: {
@@ -143,6 +177,9 @@ export default {
         background: var(--background-${type}-type);
       `;
     },
+    toggleDetailsInfo() {
+      this.toogleInfo = !this.toogleInfo;
+    },
   },
 };
 </script>
@@ -153,9 +190,17 @@ export default {
 
     width: calc(100vw - 20px);
     padding-right: 20px;
+    padding-bottom: 20px;
+    border-radius: 8px;
+
+    &_header {
+      border-radius: 8px 8px 0 0;
+    }
 
     &_display {
       padding: 0 60px 60px;
+      border-radius: 0 0 8px 8px;
+      margin-bottom: 40px;
 
       &_info,
       &_img,
@@ -190,8 +235,35 @@ export default {
       }
     }
 
-    &_stats {
+    &_info {
+      display: flex;
+      flex-direction: row;
 
+      &_stats,
+      &_attributes {
+        border: 5px solid var(--background-grass-type);
+        border-radius: 5px;
+      }
+
+      &_stats{
+        width: 360;
+        height: 310;
+      }
+
+      &_attributes {
+        display: flex;
+        flex-direction: column;
+        width: 360;
+        height: 310;
+      }
+
+      &_buttons {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+      }
     }
   }
 </style>

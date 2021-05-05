@@ -47,10 +47,10 @@ import { getHexColorFromRoot } from '@/utils/color';
 import { mapActions } from 'vuex';
 
 export default {
+  name: 'PokeCard',
   components: {
     Loading,
   },
-  name: 'PokeCard',
   props: {
     id: {
       type: String,

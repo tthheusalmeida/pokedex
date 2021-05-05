@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="chart">
     <HighCharts
       :options="chartOptions"
     />
@@ -31,6 +31,10 @@ export default {
           renderTo: 'container',
           polar: true,
           type: 'area',
+          width: 350,
+          height: 300,
+          backgroundColor: '#032b07',
+          animation: false,
         },
         title: {
           text: '',
@@ -39,29 +43,40 @@ export default {
           size: '80%',
         },
         xAxis: {
+          gridLineColor: '#60b165',
           categories: this.categories,
           tickmarkPlacement: 'on',
           lineWidth: 0,
+          legend: false,
+          labels: {
+            style: {
+              color: '#1b7e20',
+            },
+          },
         },
         yAxis: {
           gridLineInterpolation: 'polygon',
+          gridLineColor: '#60b165',
           lineWidth: 0,
           min: 0,
+          labels: {
+            style: {
+              color: '#1fc022',
+            },
+          },
         },
         tooltip: {
           shared: true,
           valuePrefix: '',
         },
         legend: {
-          align: 'right',
-          verticalAlign: 'top',
-          y: 100,
-          layout: 'vertical',
+          enabled: false,
         },
         series: [{
           name: 'Stats',
           data: this.series,
           pointPlacement: 'on',
+          color: '#1fc022',
         }],
         credits: {
           enabled: false,
@@ -73,6 +88,11 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+  .chart {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
 
 </style>
