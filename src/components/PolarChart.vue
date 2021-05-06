@@ -50,7 +50,7 @@ export default {
           legend: false,
           labels: {
             style: {
-              color: '#1b7e20',
+              color: '#1fc022',
             },
           },
         },
