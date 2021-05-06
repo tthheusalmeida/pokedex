@@ -3,14 +3,15 @@
     <div
       class="details_header headline grey lighten-1"
     >
-      <v-spacer></v-spacer>
       <v-btn
+        icon
         elevation="5"
-        color="red darken-4"
-        class="ma-2 white--text"
+        class="ma-2 red darken-4"
         @click="closePokemonDetails"
       >
-        Back
+        <v-icon color="white">
+          mdi-keyboard-return
+        </v-icon>
       </v-btn>
     </div>
 
@@ -216,6 +217,11 @@ export default {
     }
 
     &_header {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-end;
       border-radius: 8px 8px 0 0;
       height: 50px;
     }
