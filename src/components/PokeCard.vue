@@ -1,7 +1,7 @@
 <template>
   <div
     class="card"
-    :style="getCardBackgroundColor(types[0])"
+    :style="backgroundColor(types[0])"
     @click="openPokemonDetails"
   >
     <div v-if="isThereData">
@@ -43,7 +43,7 @@
 
 <script>
 import Loading from '@/components/Loading.vue';
-import { getHexColorFromRoot } from '@/utils/color';
+import { getCardBackgroundColor } from '@/utils/color';
 import { mapActions } from 'vuex';
 
 export default {
@@ -79,18 +79,6 @@ export default {
       'toggleDetails',
       'setPokemonDetails',
     ]),
-    getCardBackgroundColor(type) {
-      if (type) {
-        const color = getHexColorFromRoot({
-          type,
-          isBackground: true,
-          lighten: 32,
-        });
-
-        return `background: ${color};`;
-      }
-      return 'background: var(--card-white);';
-    },
     getTypeStyle(type) {
       return `
         color: var(--${type}-type);
@@ -122,6 +110,9 @@ export default {
         newType = isMoreThenOneColor.changeFor;
       }
       return `border: 2px solid var(--background-${newType}-type);`;
+    },
+    backgroundColor(type) {
+      return getCardBackgroundColor(type);
     },
     openPokemonDetails() {
       this.setPokemonDetails({ id: this.id });

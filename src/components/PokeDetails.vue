@@ -67,18 +67,17 @@
         </div>
 
         <div
-          v-if="toogleInfo"
-          class="details_info_attributes"
+          v-show="!toogleInfo"
+          class="details_info_stats"
         >
-          <PolarChart
-            :categories="attributeCategories"
-            :series="attributeSeries"
+          <PokeAttributes
+            :attributes="getPokemonAttributes"
           />
         </div>
 
         <div
-          v-else
-          class="details_info_stats"
+          v-show="toogleInfo"
+          class="details_info_attributes"
         >
           <PolarChart
             :categories="statsCategories"
@@ -91,7 +90,7 @@
         <v-btn
           elevation="10"
           class="grey darken-4"
-          @click="toggleDetailsInfo"
+          @click.prevent="toggleDetailsInfo"
         >
           <v-icon color="white">
             mdi-arrow-left
@@ -101,7 +100,7 @@
         <v-btn
           elevation="10"
           class="grey darken-4"
-          @click="toggleDetailsInfo"
+          @click.prevent="toggleDetailsInfo"
         >
           <v-icon color="white">
             mdi-arrow-right
@@ -114,6 +113,7 @@
 
 <script>
 import PolarChart from '@/components/PolarChart.vue';
+import PokeAttributes from '@/components/PokeAttributes.vue';
 import { addZerosToNumber } from '@/utils/formatter';
 import { getImg } from '@/utils/img';
 import { mapGetters, mapActions } from 'vuex';
@@ -122,6 +122,7 @@ export default {
   name: 'PokeDetails',
   components: {
     PolarChart,
+    PokeAttributes,
   },
   data() {
     return {
@@ -152,9 +153,10 @@ export default {
       // eslint-disable-next-line prefer-const
       let attribute = [];
 
-      attribute.push({ categorie: 'base experience', serie: this.pokemon.base_experience });
-      attribute.push({ categorie: 'height', serie: this.pokemon.height });
-      attribute.push({ categorie: 'weight', serie: this.pokemon.weight });
+      attribute.push({ name: 'base experience', value: this.pokemon.base_experience });
+      attribute.push({ name: 'height', value: this.pokemon.height });
+      attribute.push({ name: 'weight', value: this.pokemon.weight });
+      attribute.push({ name: 'abilities', value: this.pokemon.abilities });
 
       return attribute;
     },
@@ -173,12 +175,6 @@ export default {
     },
     statsSeries() {
       return this.getPokemonsStats.map((stat) => stat.serie);
-    },
-    attributeCategories() {
-      return this.getPokemonAttributes.map((attribute) => attribute.categorie);
-    },
-    attributeSeries() {
-      return this.getPokemonAttributes.map((attribute) => attribute.serie);
     },
   },
   methods: {
@@ -208,8 +204,7 @@ export default {
     text-transform: capitalize;
     margin-top: 20px;
     width: calc(100vw - 20px);
-    padding-right: 20px;
-    padding-bottom: 20px;
+    padding: 0 20px 20px 0;
     border-radius: 8px;
 
     @media not screen and (max-width: 700px) {

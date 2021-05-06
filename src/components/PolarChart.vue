@@ -34,7 +34,14 @@ export default {
           width: 350,
           height: 300,
           backgroundColor: '#032b07',
-          animation: false,
+          animation: true,
+        },
+        plotOptions: {
+          series: {
+            animation: {
+              duration: 1500,
+            },
+          },
         },
         title: {
           text: '',
