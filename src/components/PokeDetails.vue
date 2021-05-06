@@ -230,6 +230,7 @@ export default {
       padding: 0 45px 45px;
       border-radius: 0 0 8px 8px;
       margin-bottom: 40px;
+      box-shadow: var(--card-black) 0px 4px 4px -3px;
 
       &_info,
       &_img,
