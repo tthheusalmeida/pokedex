@@ -1,6 +1,6 @@
 <template>
-  <div class="details">
-    <v-card-actions
+  <section class="details">
+    <div
       class="details_header headline grey lighten-1"
     >
       <v-spacer></v-spacer>
@@ -12,7 +12,7 @@
       >
         Back
       </v-btn>
-    </v-card-actions>
+    </div>
 
     <div class="details_display grey lighten-1">
       <v-card-title
@@ -31,7 +31,7 @@
       <div class="details_display_img">
         <v-img
           width="50vw"
-          max-width="350px"
+          max-width="280px"
           :src="getPokemonImg"
         ></v-img>
       </div>
@@ -108,7 +108,7 @@
         </v-btn>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -205,18 +205,23 @@ export default {
 <style lang="scss">
   .details {
     text-transform: capitalize;
-
+    margin-top: 20px;
     width: calc(100vw - 20px);
     padding-right: 20px;
     padding-bottom: 20px;
     border-radius: 8px;
 
+    @media not screen and (max-width: 700px) {
+      width: 650px;
+    }
+
     &_header {
       border-radius: 8px 8px 0 0;
+      height: 50px;
     }
 
     &_display {
-      padding: 0 60px 60px;
+      padding: 0 45px 45px;
       border-radius: 0 0 8px 8px;
       margin-bottom: 40px;
 
@@ -228,6 +233,7 @@ export default {
       }
 
       &_info {
+        height: 50px;
         justify-content: space-between;
         border-radius: 3px 3px 0 0;
       }
