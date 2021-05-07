@@ -57,12 +57,12 @@ JavaScript Framework
 
 ## 📸	In Action
 
-### Mobile
+### 📱 Mobile
 <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
        <img src="https://github.com/tthheusalmeida/pokedex/blob/main/src/assets/gifs/mobile-gif-1.gif" width="200">
 </div>
 
-### Desktop
+### 🖥️ Desktop
 <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
        <img src="https://github.com/tthheusalmeida/pokedex/blob/main/src/assets/gifs/desktop-gif-1.gif" width="800">
 </div>
@@ -81,7 +81,7 @@ Meanwhile, it can be used locally with the steps below.
   
 First clone the project:
 ```
- git clone git@github.com:tthheusalmeida/pokedex.git
+git clone git@github.com:tthheusalmeida/pokedex.git
 ```
 
 Use the command to install the dependencies
