@@ -94,6 +94,10 @@ Run the project
 npm run serve
 ```
 
+After the above process is over, go to `http://localhost:8080/` on the browser.
+
+Enjoy!
+
 <a id="other-commands"></a>
 
 ### Other Commands
