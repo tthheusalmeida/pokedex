@@ -1,7 +1,7 @@
 <template>
   <section class="details">
     <div
-      class="details_header headline grey lighten-1"
+      class="details_header headline grey lighten-3"
     >
       <v-btn
         icon
@@ -15,9 +15,10 @@
       </v-btn>
     </div>
 
-    <div class="details_display grey lighten-1">
+    <div class="details_display grey lighten-3">
       <v-card-title
         class="details_display_info"
+        :style="backgroundColor(getPokemonTypes[0])"
       >
         <h3 class="details_display_id">
           n°{{ getPokemonId }}
@@ -27,9 +28,10 @@
         </h3>
       </v-card-title>
 
-      <v-divider class="grey lighten-1"></v-divider>
-
-      <div class="details_display_img">
+      <div
+        class="details_display_img"
+        :style="backgroundColor(getPokemonTypes[0])"
+      >
         <v-img
           width="50vw"
           max-width="280px"
@@ -37,7 +39,10 @@
         ></v-img>
       </div>
 
-      <div class="details_display_types">
+      <div
+        class="details_display_types"
+        :style="backgroundColor(getPokemonTypes[0])"
+      >
         <div
           class="details_display_types_single"
           :style="getTypeStyle(type)"
@@ -146,6 +151,7 @@
 import PolarChart from '@/components/PolarChart.vue';
 import PokeAttributes from '@/components/PokeAttributes.vue';
 import { addZerosToNumber } from '@/utils/formatter';
+import { getCardBackgroundColor, getSolidColor } from '@/utils/color';
 import { getImg } from '@/utils/img';
 import { mapGetters, mapActions } from 'vuex';
 
@@ -226,6 +232,9 @@ export default {
     toggleDetailsInfo() {
       this.toogleInfo = !this.toogleInfo;
     },
+    backgroundColor(type) {
+      return getCardBackgroundColor(getSolidColor(type));
+    },
   },
 };
 </script>
@@ -280,14 +289,15 @@ export default {
         flex-direction: row;
         justify-content: space-around;
         border-radius: 0 0 3px 3px;
+        padding: 5px;
 
         &_single {
           text-align: center;
           display: inline;
           width: 100%;
-          padding: 4px 8px;
+          padding: 4px 0;
+          margin: 8px;
           border-radius: 15px;
-          border: 10px solid var(--card-white);
         }
       }
     }

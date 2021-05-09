@@ -43,7 +43,7 @@
 
 <script>
 import Loading from '@/components/Loading.vue';
-import { getCardBackgroundColor } from '@/utils/color';
+import { getCardBackgroundColor, getSolidColor } from '@/utils/color';
 import { mapActions } from 'vuex';
 
 export default {
@@ -86,30 +86,7 @@ export default {
       `;
     },
     getBorderStyle(type) {
-      let newType = type;
-
-      const typesWithMoreColors = [
-        {
-          type: 'flying',
-          changeFor: 'water',
-        },
-        {
-          type: 'ground',
-          changeFor: 'electric',
-        },
-        {
-          type: 'dragon',
-          changeFor: 'ice',
-        },
-      ];
-
-      const isMoreThenOneColor = typesWithMoreColors
-        .filter((elem) => elem.type === type).shift();
-
-      if (isMoreThenOneColor) {
-        newType = isMoreThenOneColor.changeFor;
-      }
-      return `border: 2px solid var(--background-${newType}-type);`;
+      return `border: 2px solid var(--background-${getSolidColor(type)}-type);`;
     },
     backgroundColor(type) {
       return getCardBackgroundColor(type);

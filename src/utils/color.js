@@ -79,3 +79,31 @@ export function getCardBackgroundColor(type) {
   }
   return 'background: var(--card-white);';
 }
+
+export function getSolidColor(type) {
+  let newType = type;
+
+  const typesWithMoreColors = [
+    {
+      type: 'flying',
+      changeFor: 'water',
+    },
+    {
+      type: 'ground',
+      changeFor: 'electric',
+    },
+    {
+      type: 'dragon',
+      changeFor: 'ice',
+    },
+  ];
+
+  const isMoreThenOneColor = typesWithMoreColors
+    .filter((elem) => elem.type === type).shift();
+
+  if (isMoreThenOneColor) {
+    newType = isMoreThenOneColor.changeFor;
+  }
+
+  return newType;
+}
