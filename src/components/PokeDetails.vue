@@ -88,23 +88,54 @@
 
       <div class="details_info_buttons">
         <v-btn
+          small
+          height="30px"
+          min-width="35px"
           elevation="10"
-          class="grey darken-4"
+          class="grey darken-4 rounded-0 rounded-t-lg"
           @click.prevent="toggleDetailsInfo"
         >
-          <v-icon color="white">
-            mdi-arrow-left
-          </v-icon>
         </v-btn>
 
+        <div class="details_info_buttons_mid">
+          <v-btn
+            small
+            height="30px"
+            min-width="35px"
+            elevation="10"
+            class="grey darken-4 rounded-0 rounded-l-lg"
+            @click.prevent="toggleDetailsInfo"
+          >
+          </v-btn>
+
+          <v-btn
+            small
+            height="30px"
+            min-width="35px"
+            elevation="10"
+            class="grey darken-4 rounded-0 disable-button"
+          >
+          </v-btn>
+
+          <v-btn
+            small
+            height="30px"
+            min-width="35px"
+            elevation="10"
+            class="grey darken-4 rounded-0 rounded-r-lg"
+            @click.prevent="toggleDetailsInfo"
+          >
+          </v-btn>
+        </div>
+
         <v-btn
+          small
+          height="30px"
+          min-width="35px"
           elevation="10"
-          class="grey darken-4"
+          class="grey darken-4 rounded-0 rounded-b-lg"
           @click.prevent="toggleDetailsInfo"
         >
-          <v-icon color="white">
-            mdi-arrow-right
-          </v-icon>
         </v-btn>
       </div>
     </div>
@@ -207,7 +238,7 @@ export default {
     padding: 0 20px 20px 0;
     border-radius: 8px;
 
-    @media not screen and (max-width: 700px) {
+    @media not screen and (max-width: 800px) {
       width: 650px;
     }
 
@@ -264,6 +295,7 @@ export default {
     &_info {
       display: flex;
       flex-direction: row;
+      justify-content: space-between;
 
       &_slices {
         display: flex;
@@ -311,12 +343,22 @@ export default {
       }
 
       &_buttons {
-        width: 100%;
+        padding: 10px;
         display: flex;
-        flex-direction: row;
         align-items: center;
-        justify-content: space-around;
+        justify-content: center;
+        flex-direction: column;
+
+        &_mid {
+          display: flex;
+          flex-direction: row;
+        }
       }
     }
   }
+
+  .disable-{
+    pointer-events: none;
+  }
+
 </style>
