@@ -34,7 +34,7 @@
       >
         <v-img
           width="50vw"
-          max-width="280px"
+          :max-width="imgSize"
           :src="getPokemonImg"
         ></v-img>
       </div>
@@ -212,6 +212,12 @@ export default {
     statsSeries() {
       return this.getPokemonsStats.map((stat) => stat.serie);
     },
+    imgSize() {
+      return this.isMobile ? '200px' : '300px';
+    },
+    isMobile() {
+      return this.$vuetify.breakpoint.smAndDown;
+    },
   },
   methods: {
     ...mapActions('card', [
@@ -320,6 +326,10 @@ export default {
         justify-content: space-around;
         margin-bottom: 40px;
 
+        @media screen and (max-width: 700px) {
+          margin-bottom: 20px;
+        }
+
         &_one,
         &_two {
           width: 150px;
@@ -361,7 +371,9 @@ export default {
 
         @media screen and (max-width: 700px) {
           width: 230px;
-          height: 260px;
+          height: 210px;
+
+          margin-bottom: 20px;
         }
       }
 
@@ -380,7 +392,7 @@ export default {
         flex-direction: column;
 
         @media screen and (max-width: 700px) {
-          padding: 0;
+          padding: 1;
         }
 
         &_mid {

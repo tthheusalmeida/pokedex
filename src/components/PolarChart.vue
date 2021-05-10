@@ -7,6 +7,7 @@
 </template>
 
 <script>
+/* eslint-disable no-unused-vars */
 import { Chart } from 'highcharts-vue';
 
 export default {
@@ -25,14 +26,27 @@ export default {
     },
   },
   computed: {
+    isMobile() {
+      return this.$vuetify.breakpoint.smAndDown;
+    },
     chartOptions() {
+      let width = 350;
+      let height = 300;
+      let size = '80%';
+
+      if (this.isMobile) {
+        width = 220;
+        height = 200;
+        size = '40%';
+      }
+
       const customOptions = {
         chart: {
           renderTo: 'container',
           polar: true,
           type: 'area',
-          width: 350,
-          height: 300,
+          width,
+          height,
           backgroundColor: '#032b07',
           animation: true,
         },
@@ -47,7 +61,7 @@ export default {
           text: '',
         },
         pane: {
-          size: '80%',
+          size,
         },
         xAxis: {
           gridLineColor: '#60b165',
