@@ -25,7 +25,7 @@ export default {
     background: var(--darkest-ruby-red);
 
     @media screen and (max-width: 800px) {
-      height: 155px;
+      height: 150px;
     }
 
     &_big-ball {
@@ -72,7 +72,7 @@ export default {
                     var(--lighter-ruby-red) 0px 10px 35px 5px inset;
 
         @media screen and (max-width: 800px) {
-          left: 150px;
+          left: 140px;
         }
       }
 
@@ -83,7 +83,7 @@ export default {
                     var(--background-electric-type) 0px 10px 35px 5px inset;
 
         @media screen and (max-width: 800px) {
-          left: 220px;
+          left: 210px;
         }
       }
 
@@ -94,7 +94,7 @@ export default {
                     var(--background-grass-type) 0px 10px 35px 5px inset;
 
         @media screen and (max-width: 800px) {
-          left: 290px;
+          left: 280px;
         }
       }
     }

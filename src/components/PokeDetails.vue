@@ -58,6 +58,7 @@
         <v-btn
           icon
           disabled
+          :large="!isMobile"
           elevation="10"
           class="grey darken-4"
         >
@@ -92,9 +93,9 @@
 
       <div class="details_info_buttons">
         <v-btn
-          small
-          height="25px"
-          min-width="30px"
+          fab
+          :height="bottonSize.height"
+          :width="bottonSize.width"
           elevation="10"
           class="grey darken-4 rounded-0 rounded-t-lg"
           @click.prevent="toggleDetailsInfo"
@@ -103,9 +104,9 @@
 
         <div class="details_info_buttons_mid">
           <v-btn
-            small
-            height="25px"
-            min-width="30px"
+            fab
+            :height="bottonSize.height"
+            :width="bottonSize.width"
             elevation="10"
             class="grey darken-4 rounded-0 rounded-l-lg"
             @click.prevent="toggleDetailsInfo"
@@ -113,18 +114,18 @@
           </v-btn>
 
           <v-btn
-            small
-            height="25px"
-            min-width="30px"
+            fab
+            :height="bottonSize.height"
+            :width="bottonSize.width"
             elevation="10"
             class="grey darken-4 rounded-0 disable-button"
           >
           </v-btn>
 
           <v-btn
-            small
-            height="25px"
-            min-width="30px"
+            fab
+            :height="bottonSize.height"
+            :width="bottonSize.width"
             elevation="10"
             class="grey darken-4 rounded-0 rounded-r-lg"
             @click.prevent="toggleDetailsInfo"
@@ -133,9 +134,9 @@
         </div>
 
         <v-btn
-          small
-          height="25px"
-          min-width="30px"
+          fab
+          :height="bottonSize.height"
+          :width="bottonSize.width"
           elevation="10"
           class="grey darken-4 rounded-0 rounded-b-lg"
           @click.prevent="toggleDetailsInfo"
@@ -218,6 +219,19 @@ export default {
     isMobile() {
       return this.$vuetify.breakpoint.smAndDown;
     },
+    bottonSize() {
+      if (this.isMobile) {
+        return {
+          width: 20,
+          height: 20,
+        };
+      }
+
+      return {
+        width: 30,
+        height: 30,
+      };
+    },
   },
   methods: {
     ...mapActions('card', [
@@ -258,7 +272,7 @@ export default {
     }
 
     @media screen and (max-width: 700px) {
-      padding: 0;
+      padding: 0 20px 20px 0;
     }
 
     &_header {
@@ -392,6 +406,7 @@ export default {
 
         @media screen and (max-width: 700px) {
           padding: 1;
+          width: 80px;
         }
 
         &_mid {
