@@ -251,6 +251,7 @@ export default {
     width: calc(100vw - 20px);
     padding: 0 20px 20px 0;
     border-radius: 8px;
+    margin-bottom: 20px;
 
     @media not screen and (max-width: 800px) {
       width: 650px;
@@ -372,8 +373,6 @@ export default {
         @media screen and (max-width: 700px) {
           width: 230px;
           height: 210px;
-
-          margin-bottom: 20px;
         }
       }
 
