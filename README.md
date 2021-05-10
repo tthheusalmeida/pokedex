@@ -52,6 +52,7 @@ JavaScript Framework
 - [ESLint](https://eslint.org/) statically analyzes your code to quickly find problems
 - [Jest](https://jestjs.io/) is a delightful JavaScript Testing Framework with a focus on simplicity
 - [HighCharts](https://www.highcharts.com/) for create interactive charts easily for your web projects.
+- [Vercel](https://vercel.com/) combines the best developer experience with an obsessive focus on end-user performance.
 
 <a id="in-action"></a>
 
@@ -71,9 +72,9 @@ JavaScript Framework
 
 ## 🏁 Getting Started
 
-The project is not yet in production, because I want to meet the main features first.
+The project is hosted at the following address https://pokedex-phi-six.vercel.app/.
 
-Meanwhile, it can be used locally with the steps below.
+As it can also be used locally with the steps below.
 
 <a id="project-setup"></a>
 
