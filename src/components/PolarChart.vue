@@ -37,7 +37,7 @@ export default {
       if (this.isMobile) {
         width = 220;
         height = 200;
-        size = '40%';
+        size = '60%';
       }
 
       const customOptions = {

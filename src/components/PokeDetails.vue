@@ -222,14 +222,14 @@ export default {
     bottonSize() {
       if (this.isMobile) {
         return {
-          width: 20,
-          height: 20,
+          width: 25,
+          height: 25,
         };
       }
 
       return {
-        width: 30,
-        height: 30,
+        width: 35,
+        height: 35,
       };
     },
   },
@@ -263,16 +263,11 @@ export default {
     text-transform: capitalize;
     margin-top: 20px;
     width: calc(100vw - 20px);
-    padding: 0 20px 20px 0;
     border-radius: 8px;
     margin-bottom: 20px;
 
     @media not screen and (max-width: 800px) {
       width: 650px;
-    }
-
-    @media screen and (max-width: 700px) {
-      padding: 0 20px 20px 0;
     }
 
     &_header {
@@ -293,6 +288,7 @@ export default {
 
       @media screen and (max-width: 700px) {
         padding: 0 25px 25px;
+        margin-bottom: 20px;
       }
 
       &_info,
