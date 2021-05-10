@@ -72,12 +72,19 @@ export default {
 <style lang="scss">
   .attributes {
     padding: 20px;
-    width: 350px ;
+    width: 350px;
     height: 300px;
     line-height: 2.5;
 
     color: #1fc022;
     background: #032b07;
+
+    @media screen and (max-width: 700px) {
+      width: 220px;
+      height: 250px;
+
+      line-height: 2.0;
+    }
 
     &_height,
     &_weight,

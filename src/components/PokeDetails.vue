@@ -57,7 +57,6 @@
       <div class="details_info_sound">
         <v-btn
           icon
-          large
           disabled
           elevation="10"
           class="grey darken-4"
@@ -94,8 +93,8 @@
       <div class="details_info_buttons">
         <v-btn
           small
-          height="30px"
-          min-width="35px"
+          height="25px"
+          min-width="30px"
           elevation="10"
           class="grey darken-4 rounded-0 rounded-t-lg"
           @click.prevent="toggleDetailsInfo"
@@ -105,8 +104,8 @@
         <div class="details_info_buttons_mid">
           <v-btn
             small
-            height="30px"
-            min-width="35px"
+            height="25px"
+            min-width="30px"
             elevation="10"
             class="grey darken-4 rounded-0 rounded-l-lg"
             @click.prevent="toggleDetailsInfo"
@@ -115,8 +114,8 @@
 
           <v-btn
             small
-            height="30px"
-            min-width="35px"
+            height="25px"
+            min-width="30px"
             elevation="10"
             class="grey darken-4 rounded-0 disable-button"
           >
@@ -124,8 +123,8 @@
 
           <v-btn
             small
-            height="30px"
-            min-width="35px"
+            height="25px"
+            min-width="30px"
             elevation="10"
             class="grey darken-4 rounded-0 rounded-r-lg"
             @click.prevent="toggleDetailsInfo"
@@ -135,8 +134,8 @@
 
         <v-btn
           small
-          height="30px"
-          min-width="35px"
+          height="25px"
+          min-width="30px"
           elevation="10"
           class="grey darken-4 rounded-0 rounded-b-lg"
           @click.prevent="toggleDetailsInfo"
@@ -251,6 +250,10 @@ export default {
       width: 650px;
     }
 
+    @media screen and (max-width: 700px) {
+      padding: 0;
+    }
+
     &_header {
       width: 100%;
       display: flex;
@@ -266,6 +269,10 @@ export default {
       border-radius: 0 0 8px 8px;
       margin-bottom: 40px;
       box-shadow: var(--card-black) 0px 4px 4px -3px;
+
+      @media screen and (max-width: 700px) {
+        padding: 0 25px 25px;
+      }
 
       &_info,
       &_img,
@@ -310,7 +317,7 @@ export default {
       &_slices {
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: space-around;
         margin-bottom: 40px;
 
         &_one,
@@ -319,6 +326,10 @@ export default {
           padding: 8px 10px;
           border-radius: 12px;
           box-shadow: var(--card-black) 0px 2px 7px -2px;
+
+          @media screen and (max-width: 700px) {
+            width: 70px;
+          }
         }
 
         &_one {
@@ -338,11 +349,20 @@ export default {
 
       &_sound {
         margin: 10px;
+
+        @media screen and (max-width: 700px) {
+          margin: 0;
+        }
       }
 
       &_stats{
         width: 360;
         height: 310;
+
+        @media screen and (max-width: 700px) {
+          width: 230px;
+          height: 260px;
+        }
       }
 
       &_attributes {
@@ -358,6 +378,10 @@ export default {
         align-items: center;
         justify-content: center;
         flex-direction: column;
+
+        @media screen and (max-width: 700px) {
+          padding: 0;
+        }
 
         &_mid {
           display: flex;
