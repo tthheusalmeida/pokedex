@@ -65,19 +65,6 @@ export function getHexColorFromRoot(options) {
   return colorFromRoot;
 }
 
-export function getCardBackgroundColor(type) {
-  if (type) {
-    const color = getHexColorFromRoot({
-      type,
-      isBackground: true,
-      lighten: 32,
-    });
-
-    return `background: ${color};`;
-  }
-  return 'background: var(--card-white);';
-}
-
 export function getSolidColor(type) {
   let newType = type;
 
@@ -104,4 +91,17 @@ export function getSolidColor(type) {
   }
 
   return newType;
+}
+
+export function getCardBackgroundColor(type) {
+  if (type) {
+    const color = getHexColorFromRoot({
+      type: getSolidColor(type),
+      isBackground: true,
+      lighten: 32,
+    });
+
+    return `background: ${color};`;
+  }
+  return 'background: var(--card-white);';
 }
