@@ -109,7 +109,7 @@
             :width="bottonSize.width"
             elevation="10"
             class="grey darken-4 rounded-0 rounded-l-lg"
-            @click.prevent="toggleDetailsInfo"
+            @click.prevent="previousPokemon"
           >
           </v-btn>
 
@@ -128,7 +128,7 @@
             :width="bottonSize.width"
             elevation="10"
             class="grey darken-4 rounded-0 rounded-r-lg"
-            @click.prevent="toggleDetailsInfo"
+            @click.prevent="nextPokemon"
           >
           </v-btn>
         </div>
@@ -164,7 +164,11 @@ export default {
   data() {
     return {
       toogleInfo: false,
+      pokemonId: '',
     };
+  },
+  created() {
+    this.pokemonId = Number(this.getPokemonDetails.id);
   },
   computed: {
     ...mapGetters('card', [
@@ -175,7 +179,7 @@ export default {
     ]),
     pokemon() {
       return this.getPokemons
-        .filter((pokemon) => pokemon.id === Number(this.getPokemonDetails.id))[0];
+        .filter((pokemon) => pokemon.id === this.pokemonId)[0];
     },
     getPokemonId() {
       return addZerosToNumber(this.pokemon);
@@ -253,6 +257,29 @@ export default {
     },
     backgroundColor(type) {
       return getCardBackgroundColor(getSolidColor(type));
+    },
+    nextPokemon() {
+      // eslint-disable-next-line no-plusplus
+      const nextId = this.pokemonId + 1;
+
+      const isThereNextPokemon = this.getPokemons
+        .filter((pokemon) => pokemon.id === nextId)[0];
+
+      this.pokemonId = isThereNextPokemon
+        ? nextId
+        : this.getPokemons[0].id;
+    },
+    previousPokemon() {
+      // eslint-disable-next-line no-plusplus
+      const previousId = this.pokemonId - 1;
+
+      const isTherePreviousPokemon = this.getPokemons
+        .filter((pokemon) => pokemon.id === previousId)[0];
+
+      const lastIndex = this.getPokemons.length - 1;
+      this.pokemonId = isTherePreviousPokemon
+        ? previousId
+        : this.getPokemons[lastIndex].id;
     },
   },
 };
