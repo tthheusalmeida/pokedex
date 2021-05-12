@@ -37,7 +37,7 @@ export function getHexColorFromRoot(options) {
     isBackground,
     lighten,
   } = options;
-  var colorFromRoot = '';
+  let colorFromRoot = '';
 
   const definedColor = isBackground
     ? `--background-${type}-type`
@@ -59,9 +59,7 @@ export function getHexColorFromRoot(options) {
     split[1] = lightenHexColor(split[1], lighten);
     split[3] = lightenHexColor(split[3], lighten);
 
-    const color = split.join(' ');
-
-    colorFromRoot = color;
+    colorFromRoot = split.join(' ');
   }
 
   return colorFromRoot;

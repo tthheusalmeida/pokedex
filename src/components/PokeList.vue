@@ -22,7 +22,7 @@
 import PokeCard from '@/components/PokeCard.vue';
 import Loading from '@/components/Loading.vue';
 import { addZerosToNumber } from '@/utils/formatter';
-import { getImg } from '@/utils/img';
+import { getImgLowQuality } from '@/utils/img';
 import { mapGetters } from 'vuex';
 
 export default {
@@ -51,7 +51,7 @@ export default {
       return pokemon.types.map((types) => types.type.name);
     },
     getPokemonImg(pokemon) {
-      return getImg(pokemon);
+      return getImgLowQuality(pokemon) || '';
     },
   },
 };

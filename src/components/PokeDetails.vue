@@ -152,7 +152,7 @@ import PolarChart from '@/components/PolarChart.vue';
 import PokeAttributes from '@/components/PokeAttributes.vue';
 import { addZerosToNumber } from '@/utils/formatter';
 import { getCardBackgroundColor, getSolidColor } from '@/utils/color';
-import { getImg } from '@/utils/img';
+import { getImgHighQuality } from '@/utils/img';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
@@ -184,7 +184,7 @@ export default {
       return this.pokemon.name;
     },
     getPokemonImg() {
-      return getImg(this.pokemon);
+      return getImgHighQuality(this.pokemon);
     },
     getPokemonAttributes() {
       // eslint-disable-next-line prefer-const

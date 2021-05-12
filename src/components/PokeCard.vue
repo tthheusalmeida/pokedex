@@ -120,8 +120,11 @@ export default {
 
     &_img {
       background: var(--card-gray);
-      border-radius: 100%;
+      border-radius: 200%;
       min-width: 130px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       img {
         width: 130px;
