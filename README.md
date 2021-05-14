@@ -50,6 +50,7 @@ JavaScript Framework
 - [Vuetify](https://vuetifyjs.com/) is a Vue UI Library with beautifully handcrafted Material Components
 - [Vuex](https://vuex.vuejs.org/) is a state management pattern and library for Vue.js applications
 - [ESLint](https://eslint.org/) statically analyzes your code to quickly find problems
+- [Lodash](https://lodash.com/) a modern JavaScript utility library delivering modularity, performance & extras.
 - [Jest](https://jestjs.io/) is a delightful JavaScript Testing Framework with a focus on simplicity
 - [HighCharts](https://www.highcharts.com/) for create interactive charts easily for your web projects.
 - [Vercel](https://vercel.com/) combines the best developer experience with an obsessive focus on end-user performance.
