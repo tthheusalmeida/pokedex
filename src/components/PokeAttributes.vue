@@ -71,17 +71,20 @@ export default {
 
 <style lang="scss">
   .attributes {
-    padding: 20px;
-    width: 350px;
-    height: 300px;
+    padding: 10px;
+    width: 360px;
+    height: 310px;
     line-height: 2.5;
 
     color: #1fc022;
     background: #032b07;
 
+    border: 5px solid var(--background-grass-type);
+    border-radius: 5px;
+
     @media screen and (max-width: 700px) {
-      width: 220px;
-      height: 200px;
+      width: 230px;
+      height: 210px;
 
       font-size: 13px;
       line-height: 2.0;

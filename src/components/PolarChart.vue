@@ -9,6 +9,7 @@
 <script>
 /* eslint-disable no-unused-vars */
 import { Chart } from 'highcharts-vue';
+import merge from 'lodash/merge';
 
 export default {
   name: 'PolarChart',
@@ -23,6 +24,10 @@ export default {
     series: {
       type: Array,
       default: () => ([]),
+    },
+    customOptions: {
+      type: Object,
+      default: () => ({}),
     },
   },
   computed: {
@@ -39,8 +44,7 @@ export default {
         height = 200;
         size = '60%';
       }
-
-      const customOptions = {
+      const options = {
         chart: {
           renderTo: 'container',
           polar: true,
@@ -103,7 +107,8 @@ export default {
           enabled: false,
         },
       };
-      return customOptions;
+
+      return merge({}, options, this.customOptions);
     },
   },
 };
@@ -114,6 +119,9 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: center;
+
+    border: 5px solid var(--background-grass-type);
+    border-radius: 5px;
   }
 
 </style>

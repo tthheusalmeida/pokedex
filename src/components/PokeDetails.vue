@@ -87,6 +87,7 @@
           <PolarChart
             :categories="statsCategories"
             :series="statsSeries"
+            :custom-options="statsOptions"
           />
         </div>
       </div>
@@ -216,6 +217,19 @@ export default {
     },
     statsSeries() {
       return this.getPokemonsStats.map((stat) => stat.serie);
+    },
+    statsOptions() {
+      const maxValues = [...this.statsSeries];
+      const max = Math.round(maxValues
+        ?.sort((a, b) => a - b)
+        ?.reverse()
+        ?.shift() / 10) * 10;
+
+      return {
+        yAxis: {
+          max,
+        },
+      };
     },
     imgSize() {
       return this.isMobile ? '200px' : '300px';
@@ -387,12 +401,6 @@ export default {
         &_two {
           background: var(--card-dark-blue);
         }
-      }
-
-      &_stats,
-      &_attributes {
-        border: 5px solid var(--background-grass-type);
-        border-radius: 5px;
       }
 
       &_sound {
