@@ -47,6 +47,7 @@ export default {
     display: flex;
     flex-direction: row;
     margin-bottom: 40px;
+    justify-content: space-around;
 
     &_single{
       width: calc(10vw - 10px);
