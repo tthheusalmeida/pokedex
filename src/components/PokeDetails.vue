@@ -65,7 +65,7 @@
         </v-btn>
       </div>
 
-      <div>
+      <div class="mr-2">
         <div class="details_info_slices">
           <div class="details_info_slices_one"></div>
           <div class="details_info_slices_two"></div>
@@ -240,14 +240,14 @@ export default {
     bottonSize() {
       if (this.isMobile) {
         return {
-          width: 25,
-          height: 25,
+          width: 23,
+          height: 23,
         };
       }
 
       return {
-        width: 35,
-        height: 35,
+        width: 28,
+        height: 28,
       };
     },
   },
@@ -302,14 +302,9 @@ export default {
 <style lang="scss">
   .details {
     text-transform: capitalize;
-    margin-top: 20px;
-    width: calc(100vw - 20px);
+    width: 100%;
     border-radius: 8px;
     margin-bottom: 20px;
-
-    @media not screen and (max-width: 800px) {
-      width: 650px;
-    }
 
     &_header {
       width: 100%;
@@ -322,15 +317,10 @@ export default {
     }
 
     &_display {
-      padding: 0 45px 45px;
+      padding: 0 25px 25px;
       border-radius: 0 0 8px 8px;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
       box-shadow: var(--card-black) 0px 4px 4px -3px;
-
-      @media screen and (max-width: 700px) {
-        padding: 0 25px 25px;
-        margin-bottom: 20px;
-      }
 
       &_info,
       &_img,
@@ -370,7 +360,7 @@ export default {
     &_info {
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
+      justify-content: space-around;
 
       &_slices {
         display: flex;
@@ -378,13 +368,10 @@ export default {
         justify-content: space-around;
         margin-bottom: 40px;
 
-        @media screen and (max-width: 700px) {
-          margin-bottom: 20px;
-        }
-
         &_one,
         &_two {
-          width: 150px;
+          width: calc(10vw - 10px);
+          max-width: 150px;
           padding: 8px 10px;
           border-radius: 12px;
           box-shadow: var(--card-black) 0px 2px 7px -2px;
@@ -412,13 +399,6 @@ export default {
       }
 
       &_stats{
-        width: 360;
-        height: 310;
-
-        @media screen and (max-width: 700px) {
-          width: 230px;
-          height: 210px;
-        }
       }
 
       &_attributes {
@@ -429,16 +409,11 @@ export default {
       }
 
       &_buttons {
-        padding: 10px;
+        widows: 95px;
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
-
-        @media screen and (max-width: 700px) {
-          padding: 1;
-          width: 80px;
-        }
 
         &_mid {
           display: flex;

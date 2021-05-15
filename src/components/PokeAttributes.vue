@@ -5,17 +5,17 @@
     <div>
       <div class="attributes_height">
         <h3>{{ height.name}}</h3>
-        <div>{{ (height.value / 10).toFixed(1) }} m</div>
+        <div class="pl-2">{{ (height.value / 10).toFixed(1) }} m</div>
       </div>
 
       <div class="attributes_weight">
         <h3>{{ weight.name }}</h3>
-        <div>{{ (weight.value/ 10).toFixed(1) }} kg</div>
+        <div class="pl-2">{{ (weight.value/ 10).toFixed(1) }} kg</div>
       </div>
 
       <div class="attributes_base-experience">
         <h3>{{ baseExperience.name }}</h3>
-        <div>{{ baseExperience.value }} xp</div>
+        <div class="pl-2">{{ baseExperience.value }} xp</div>
       </div>
 
       <div class="attributes_abilities">
@@ -23,6 +23,7 @@
         <div class="attributes_abilities_component">
           <div
             v-for="(ability, index) in abilities.value" :key="index"
+            class="pl-2"
           >
             {{ ability }}
           </div>
@@ -72,23 +73,17 @@ export default {
 <style lang="scss">
   .attributes {
     padding: 10px;
-    width: 360px;
-    height: 310px;
-    line-height: 2.5;
+    width: 100%;
+    min-width: calc(25vw);
+    height: 250px;
 
+    font-size: 14px;
+    line-height: 2.0;
     color: #1fc022;
     background: #032b07;
 
     border: 5px solid var(--background-grass-type);
     border-radius: 5px;
-
-    @media screen and (max-width: 700px) {
-      width: 230px;
-      height: 210px;
-
-      font-size: 13px;
-      line-height: 2.0;
-    }
 
     &_height,
     &_weight,
@@ -97,6 +92,7 @@ export default {
       display: flex;
       flex-direction: row;
       align-items: flex-end;
+      padding: 2px;
       justify-content: space-between;
       border-bottom: 2px dotted var(--background-grass-type);
 

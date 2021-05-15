@@ -3,7 +3,24 @@
     <PokedexHeader />
 
     <PokeList v-if="showList"/>
-    <PokeDetails v-else-if="showDetails"/>
+
+    <v-container
+      v-else-if="showDetails"
+      class="information"
+    >
+      <v-row
+        no-gutters
+        class="ma-2"
+      >
+        <v-col cols="5">
+          <PokeDetails />
+        </v-col>
+        <v-col cols="1"></v-col>
+        <v-col cols="5">
+          <PokeExploration />
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
@@ -11,6 +28,7 @@
 import PokedexHeader from '@/components/PokedexHeader.vue';
 import PokeList from '@/components/PokeList.vue';
 import PokeDetails from '@/components/PokeDetails.vue';
+import PokeExploration from '@/components/PokeExploration.vue';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
@@ -19,6 +37,7 @@ export default {
     PokedexHeader,
     PokeList,
     PokeDetails,
+    PokeExploration,
   },
   created() {
     this.fetchPokemonsData();
@@ -51,6 +70,10 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  .information {
+    display: grid;
   }
 
 </style>

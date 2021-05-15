@@ -34,14 +34,19 @@ export default {
     isMobile() {
       return this.$vuetify.breakpoint.smAndDown;
     },
+    isTable() {
+      return this.$vuetify.breakpoint.mdAndDown;
+    },
     chartOptions() {
-      let width = 350;
-      let height = 300;
+      const height = 240;
+      let width = this.vhToPixel(24.5);
       let size = '80%';
 
       if (this.isMobile) {
-        width = 220;
-        height = 200;
+        width = this.vhToPixel(23.7);
+        size = '40%';
+      } else if (this.isTable) {
+        width = this.vhToPixel(23.5);
         size = '60%';
       }
       const options = {
@@ -109,6 +114,11 @@ export default {
       };
 
       return merge({}, options, this.customOptions);
+    },
+  },
+  methods: {
+    vhToPixel(vw) {
+      return (vw * this.$vuetify.breakpoint.width) / 100;
     },
   },
 };
