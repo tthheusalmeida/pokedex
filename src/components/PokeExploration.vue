@@ -21,6 +21,21 @@
         :options="slicesOptions"
       />
     </div>
+
+    <div class="exploration_buttons_small d-flex justify-space-between">
+      <div class="d-flex">
+        <div v-for="n in 2" :key="n">
+          <v-btn
+            :width="buttonSize.width"
+            :height="buttonSize.height"
+            elevation="10"
+            color="grey lighten-1"
+            class="exploration_buttons_button rounded-1 ma-1"
+          >
+          </v-btn>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
