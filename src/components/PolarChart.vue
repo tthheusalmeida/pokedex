@@ -39,14 +39,14 @@ export default {
     },
     chartOptions() {
       const height = 240;
-      let width = this.vhToPixel(24.5);
+      let width = this.viewWidthToPixel(24.5);
       let size = '80%';
 
       if (this.isMobile) {
-        width = this.vhToPixel(23.7);
+        width = this.viewWidthToPixel(23.7);
         size = '40%';
       } else if (this.isTable) {
-        width = this.vhToPixel(23.5);
+        width = this.viewWidthToPixel(23.5);
         size = '60%';
       }
       const options = {
@@ -117,7 +117,7 @@ export default {
     },
   },
   methods: {
-    vhToPixel(vw) {
+    viewWidthToPixel(vw) {
       return (vw * this.$vuetify.breakpoint.width) / 100;
     },
   },

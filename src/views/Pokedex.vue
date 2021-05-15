@@ -6,16 +6,18 @@
 
     <v-container
       v-else-if="showDetails"
-      class="information"
+      class="information pr-5"
     >
       <v-row
         no-gutters
         class="ma-2"
       >
-        <v-col cols="5">
+        <v-col cols="6">
           <PokeDetails />
         </v-col>
+
         <v-col cols="1"></v-col>
+
         <v-col cols="5">
           <PokeExploration />
         </v-col>
