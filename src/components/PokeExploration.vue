@@ -6,11 +6,12 @@
     <div class="exploration_buttons d-flex flex-wrap justify-space-around">
       <div v-for="n in 10" :key="n">
         <v-btn
+          fab
           :width="buttonSize.width"
           :height="buttonSize.height"
           elevation="10"
           color="blue lighten-1"
-          class="exploration_buttons_button rounded-1"
+          class="exploration_buttons_button rounded-0 rounded"
         >
         </v-btn>
       </div>
@@ -26,11 +27,12 @@
       <div class="d-flex">
         <div v-for="n in 2" :key="n">
           <v-btn
+            fab
             :width="buttonSize.width"
             :height="buttonSize.height"
             elevation="10"
             color="grey lighten-1"
-            class="exploration_buttons_button rounded-1 ma-1"
+            class="exploration_buttons_button rounded-0 rounded ma-1"
           >
           </v-btn>
         </div>
@@ -51,11 +53,12 @@
     <div class="exploration_buttons_big d-flex justify-space-between pt-16">
       <div v-for="n in 2" :key="n">
         <v-btn
+          fab
           :width="bigButtonSize.width"
           :height="bigButtonSize.height"
           elevation="10"
           color="grey darken-4"
-          class="exploration_buttons_button rounded-1 ma-1"
+          class="exploration_buttons_button rounded-0 rounded ma-1"
         >
         </v-btn>
       </div>
@@ -75,7 +78,7 @@ export default {
     buttonSize() {
       const viewWidthToPixel = (value) => {
         if (this.isMobile) {
-          return ((value - 1) * this.$vuetify.breakpoint.width) / 100;
+          return ((value + 9) * this.$vuetify.breakpoint.width) / 100;
         }
         if (this.isTable) {
           return ((value - 0.3) * this.$vuetify.breakpoint.width) / 100;
@@ -101,7 +104,7 @@ export default {
     bigButtonSize() {
       const viewWidthToPixel = (value) => {
         if (this.isMobile) {
-          return ((value - 1) * this.$vuetify.breakpoint.width) / 100;
+          return ((value + 16) * this.$vuetify.breakpoint.width) / 100;
         }
         if (this.isTable) {
           return ((value - 0.3) * this.$vuetify.breakpoint.width) / 100;

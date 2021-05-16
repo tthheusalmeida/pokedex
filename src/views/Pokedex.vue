@@ -11,6 +11,7 @@
       <v-row
         no-gutters
         class="ma-2"
+        v-if="!isMobile"
       >
         <v-col cols="6">
           <PokeDetails />
@@ -22,6 +23,18 @@
           <PokeExploration />
         </v-col>
       </v-row>
+
+      <v-col
+        no-gutters
+        class="ma-2"
+        v-else
+      >
+        <PokeDetails />
+
+        <v-divider class="grey lighten-3 mb-5"></v-divider>
+
+        <PokeExploration />
+      </v-col>
     </v-container>
   </div>
 </template>
@@ -41,6 +54,11 @@ export default {
     PokeDetails,
     PokeExploration,
   },
+  data() {
+    return {
+      page: 1,
+    };
+  },
   created() {
     this.fetchPokemonsData();
   },
@@ -53,6 +71,9 @@ export default {
     },
     showDetails() {
       return this.getDetails;
+    },
+    isMobile() {
+      return this.$vuetify.breakpoint.smAndDown;
     },
   },
   methods: {
