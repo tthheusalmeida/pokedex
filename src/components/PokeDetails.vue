@@ -384,9 +384,6 @@ export default {
         }
       }
 
-      &_stats{
-      }
-
       &_attributes {
         display: flex;
         flex-direction: column;
