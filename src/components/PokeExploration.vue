@@ -22,7 +22,7 @@
       />
     </div>
 
-    <div class="exploration_buttons_small d-flex justify-space-between">
+    <div class="exploration_buttons_small d-flex justify-space-between pt-10">
       <div class="d-flex">
         <div v-for="n in 2" :key="n">
           <v-btn
@@ -34,6 +34,30 @@
           >
           </v-btn>
         </div>
+      </div>
+
+      <div
+        class="d-flex justify-center align-end pr-2"
+      >
+        <v-btn
+          fab
+          x-small
+          color="yellow disable-button"
+        >
+        </v-btn>
+      </div>
+    </div>
+
+    <div class="exploration_buttons_big d-flex justify-space-between pt-16">
+      <div v-for="n in 2" :key="n">
+        <v-btn
+          :width="bigButtonSize.width"
+          :height="bigButtonSize.height"
+          elevation="10"
+          color="grey darken-4"
+          class="exploration_buttons_button rounded-1 ma-1"
+        >
+        </v-btn>
       </div>
     </div>
   </div>
@@ -74,6 +98,22 @@ export default {
         height: `${viewHeight()}px`,
       };
     },
+    bigButtonSize() {
+      const viewWidthToPixel = (value) => {
+        if (this.isMobile) {
+          return ((value - 1) * this.$vuetify.breakpoint.width) / 100;
+        }
+        if (this.isTable) {
+          return ((value - 0.3) * this.$vuetify.breakpoint.width) / 100;
+        }
+        return (value * this.$vuetify.breakpoint.width) / 100;
+      };
+
+      return {
+        width: `${viewWidthToPixel(16)}px`,
+        height: this.buttonSize.height,
+      };
+    },
     isMobile() {
       return this.$vuetify.breakpoint.smAndDown;
     },
@@ -86,6 +126,7 @@ export default {
           slices: {
             justifyContent: 'flex-end',
             paddingTop: '10px',
+            paddingRight: '4px',
           },
           single: {
             marginRight: '4px',
@@ -118,6 +159,10 @@ export default {
       }
     }
 
+  }
+
+  .disable-button{
+    pointer-events: none;
   }
 
 </style>

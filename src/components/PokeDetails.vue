@@ -409,7 +409,7 @@ export default {
     }
   }
 
-  .disable-{
+  .disable-button{
     pointer-events: none;
   }
 
