@@ -32,7 +32,7 @@
             :height="buttonSize.height"
             elevation="10"
             color="grey lighten-1"
-            class="exploration_buttons_button rounded-0 rounded ma-1"
+            class="exploration_buttons_button disable-button rounded-0 rounded ma-1"
           >
           </v-btn>
         </div>
@@ -58,7 +58,7 @@
           :height="bigButtonSize.height"
           elevation="10"
           color="grey darken-4"
-          class="exploration_buttons_button rounded-0 rounded ma-1"
+          class="exploration_buttons_button rounded-0 rounded ma-1 disable-button"
         >
         </v-btn>
       </div>
@@ -164,7 +164,7 @@ export default {
 
   }
 
-  .disable-button{
+  .disable-button {
     pointer-events: none;
   }
 
