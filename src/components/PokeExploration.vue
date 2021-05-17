@@ -1,6 +1,9 @@
 <template>
   <div class="exploration">
-    <div class="exploration_display">
+    <div class="exploration_display grey darken-4">
+      <keep-alive>
+        <component :is="currentDisplay"></component>
+      </keep-alive>
     </div>
 
     <div class="exploration_buttons d-flex flex-wrap justify-space-around">
@@ -12,6 +15,7 @@
           elevation="10"
           color="blue lighten-1"
           class="exploration_buttons_button rounded-0 rounded"
+          :click="setDisplayContent(n)"
         >
         </v-btn>
       </div>
@@ -68,11 +72,21 @@
 
 <script>
 import Slices from '@/components/base/Slices.vue';
+import Moves from '@/components/exploration/Moves.vue';
 
 export default {
   name: 'PokeExploration',
   components: {
     Slices,
+    Moves,
+  },
+  data() {
+    return {
+      currentDisplay: 'Moves',
+      displays: [
+        'Moves',
+      ],
+    };
   },
   computed: {
     buttonSize() {
@@ -142,6 +156,14 @@ export default {
       };
     },
   },
+  methods: {
+    setDisplayContent(position) {
+      const isThereDisplay = this.displays[position];
+      if (isThereDisplay) {
+        this.currentDisplay = isThereDisplay;
+      }
+    },
+  },
 };
 </script>
 
@@ -150,10 +172,11 @@ export default {
     width: 100%;
 
     &_display {
-      background: var(--card-black);
       height: 250px;
       border-radius: 4px;
       margin-bottom: 40px;
+      padding: 10px;
+      color: var(--card-white);
     }
 
     &_buttons {
