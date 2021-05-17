@@ -1,9 +1,9 @@
 <template>
-  <div class="moves">
+  <div class="held">
     <h2
       class="d-flex justify-center"
     >
-      Moves
+      Held Items
     </h2>
 
     <div>
@@ -35,7 +35,7 @@ import { removeDashFromString } from '@/utils/formatter';
 import { mapGetters } from 'vuex';
 
 export default {
-  name: 'Moves',
+  name: 'HeldItems',
   data() {
     return {
       page: 1,
@@ -54,20 +54,20 @@ export default {
         .filter((pokemon) => pokemon.id === Number(this.getPokemonDetails.id))[0];
     },
     headers() {
-      console.log('pokemon: ', this.pokemon);
       return [
         {
-          text: 'Move',
-          value: 'move',
+          text: 'Item',
+          value: 'item',
           align: 'center',
           sortable: false,
         },
       ];
     },
     desserts() {
-      const allMoves = this.pokemon.moves;
+      const allheldItems = this.pokemon.held_items.map((each) => ({ item: each.item.name }));
+      console.log('allMoves: ', allheldItems);
 
-      return allMoves.map((each) => ({ move: removeDashFromString(each.move.name) }));
+      return allheldItems.map((each) => ({ item: removeDashFromString(each.item) }));
     },
     isMobile() {
       return this.$vuetify.breakpoint.smAndDown;
@@ -83,7 +83,7 @@ export default {
 </script>
 
 <style lang="scss">
-  .moves {
+  .held {
     color: var(--card-white);
   }
 

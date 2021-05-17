@@ -7,7 +7,7 @@
     </div>
 
     <div class="exploration_buttons d-flex flex-wrap justify-space-around">
-      <div v-for="n in 10" :key="n">
+      <div v-for="(icon, index) in icons" :key="index">
         <v-btn
           fab
           :width="buttonSize.width"
@@ -15,10 +15,10 @@
           elevation="10"
           color="blue lighten-1"
           class="exploration_buttons_button rounded-0 rounded"
-          :click="setDisplayContent(n)"
+          @click="currentDisplay = getDisplay(index)"
         >
         <v-icon color="grey lighten-4">
-          mdi-{{ iconToExplorationButon(n - 1) }}
+          mdi-{{ iconToExplorationButon(index) }}
         </v-icon>
         </v-btn>
       </div>
@@ -74,18 +74,25 @@
 <script>
 import Slices from '@/components/base/Slices.vue';
 import Moves from '@/components/exploration/Moves.vue';
+// import Evolutions from '@/components/exploration/Evolutions.vue';
+import HeldItems from '@/components/exploration/HeldItems.vue';
 
 export default {
   name: 'PokeExploration',
   components: {
     Slices,
     Moves,
+    HeldItems,
   },
   data() {
     return {
-      currentDisplay: 'Moves',
+      currentDisplay: Moves,
       displays: [
-        'Moves',
+        Moves,
+        HeldItems,
+        Moves,
+        HeldItems,
+        HeldItems,
       ],
       icons: [{
         name: 'Moves',
@@ -106,30 +113,6 @@ export default {
       {
         name: 'Held Item',
         icon: 'hand-heart',
-      },
-      {
-        name: '',
-        icon: '',
-      },
-      {
-        name: '',
-        icon: '',
-      },
-      {
-        name: '',
-        icon: '',
-      },
-      {
-        name: '',
-        icon: '',
-      },
-      {
-        name: '',
-        icon: '',
-      },
-      {
-        name: '',
-        icon: '',
       }],
     };
   },
@@ -202,11 +185,8 @@ export default {
     },
   },
   methods: {
-    setDisplayContent(position) {
-      const isThereDisplay = this.displays[position];
-      if (isThereDisplay) {
-        this.currentDisplay = isThereDisplay;
-      }
+    getDisplay(index) {
+      return this.displays[index];
     },
     iconToExplorationButon(index) {
       return this.icons[index].icon;
