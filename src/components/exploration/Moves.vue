@@ -75,7 +75,7 @@ export default {
       return this.isMobile ? 3 : 4;
     },
     totalVisible() {
-      return this.isMobile ? 3 : 5;
+      return this.isMobile ? 3 : 7;
     },
   },
 };
