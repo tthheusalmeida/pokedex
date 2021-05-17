@@ -1,45 +1,26 @@
 <template>
   <div class="moves">
-    <h2
-      class="d-flex justify-center"
-    >
-      Moves
-    </h2>
-
-    <div>
-      <v-data-table
-        dense
-        fixed-header
-        hide-default-header
-        hide-default-footer
-        :headers="headers"
-        :items="desserts"
-        :items-per-page="itemsPerPage"
-        :page.sync="page"
-        class="elevation-1"
-        @page-count="pageCount = $event"
-      >
-      </v-data-table>
-      <v-pagination
-        v-model="page"
-        :length="pageCount"
-        :total-visible="totalVisible"
-        color="blue lighten-1"
-      ></v-pagination>
-    </div>
+    <DataTable
+      :title="title"
+      :headers="headers"
+      :desserts="desserts"
+    />
   </div>
 </template>
 
 <script>
+import DataTable from '@/components/base/DataTable.vue';
 import { removeDashFromString } from '@/utils/formatter';
 import { mapGetters } from 'vuex';
 
 export default {
   name: 'Moves',
+  components: {
+    DataTable,
+  },
   data() {
     return {
-      page: 1,
-      pageCount: 0,
+      title: 'Moves',
     };
   },
   computed: {
@@ -54,7 +35,6 @@ export default {
         .filter((pokemon) => pokemon.id === Number(this.getPokemonDetails.id))[0];
     },
     headers() {
-      console.log('pokemon: ', this.pokemon);
       return [
         {
           text: 'Move',
@@ -69,22 +49,10 @@ export default {
 
       return allMoves.map((each) => ({ move: removeDashFromString(each.move.name) }));
     },
-    isMobile() {
-      return this.$vuetify.breakpoint.smAndDown;
-    },
-    itemsPerPage() {
-      return this.isMobile ? 3 : 4;
-    },
-    totalVisible() {
-      return this.isMobile ? 3 : 7;
-    },
   },
 };
 </script>
 
 <style lang="scss">
-  .moves {
-    color: var(--card-white);
-  }
 
 </style>
