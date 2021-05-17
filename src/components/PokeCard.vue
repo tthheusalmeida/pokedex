@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import Loading from '@/components/Loading.vue';
+import Loading from '@/components/base/Loading.vue';
 import { removeDashFromString } from '@/utils/formatter';
 import { getCardBackgroundColor, getSolidColor } from '@/utils/color';
 import { mapActions } from 'vuex';

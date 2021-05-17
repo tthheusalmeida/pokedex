@@ -20,7 +20,7 @@
 
 <script>
 import PokeCard from '@/components/PokeCard.vue';
-import Loading from '@/components/Loading.vue';
+import Loading from '@/components/base/Loading.vue';
 import { addZerosToNumber } from '@/utils/formatter';
 import { getImgLowQuality } from '@/utils/img';
 import { mapGetters } from 'vuex';
