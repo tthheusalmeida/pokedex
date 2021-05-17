@@ -17,14 +17,15 @@
           class="exploration_buttons_button rounded-0 rounded"
           :click="setDisplayContent(n)"
         >
+        <v-icon color="grey lighten-4">
+          mdi-{{ iconToExplorationButon(n - 1) }}
+        </v-icon>
         </v-btn>
       </div>
     </div>
 
     <div>
-      <Slices
-        :options="slicesOptions"
-      />
+      <Slices :options="slicesOptions"/>
     </div>
 
     <div class="exploration_buttons_small d-flex justify-space-between pt-10">
@@ -86,6 +87,50 @@ export default {
       displays: [
         'Moves',
       ],
+      icons: [{
+        name: 'Moves',
+        icon: 'format-list-bulleted-square',
+      },
+      {
+        name: 'Evolution',
+        icon: 'chart-timeline-variant',
+      },
+      {
+        name: 'About',
+        icon: 'book-account',
+      },
+      {
+        name: 'Where to Find',
+        icon: 'map-search',
+      },
+      {
+        name: 'Held Item',
+        icon: 'hand-heart',
+      },
+      {
+        name: '',
+        icon: '',
+      },
+      {
+        name: '',
+        icon: '',
+      },
+      {
+        name: '',
+        icon: '',
+      },
+      {
+        name: '',
+        icon: '',
+      },
+      {
+        name: '',
+        icon: '',
+      },
+      {
+        name: '',
+        icon: '',
+      }],
     };
   },
   computed: {
@@ -162,6 +207,12 @@ export default {
       if (isThereDisplay) {
         this.currentDisplay = isThereDisplay;
       }
+    },
+    iconToExplorationButon(index) {
+      return this.icons[index].icon;
+    },
+    nameToExplorationButon(index) {
+      return this.icons[index].name;
     },
   },
 };

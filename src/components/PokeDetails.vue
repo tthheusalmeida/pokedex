@@ -66,9 +66,7 @@
       </div>
 
       <div class="mr-2">
-        <Slices
-          :options="slicesOptions"
-        />
+        <Slices :options="slicesOptions"/>
 
         <div
           v-show="!toogleInfo"
