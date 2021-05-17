@@ -151,7 +151,7 @@
 import PolarChart from '@/components/PolarChart.vue';
 import PokeAttributes from '@/components/PokeAttributes.vue';
 import Slices from '@/components/base/Slices.vue';
-import { addZerosToNumber } from '@/utils/formatter';
+import { addZerosToNumber, removeDashFromString } from '@/utils/formatter';
 import { getCardBackgroundColor, getSolidColor } from '@/utils/color';
 import { getImgHighQuality } from '@/utils/img';
 import { mapGetters, mapActions } from 'vuex';
@@ -187,7 +187,7 @@ export default {
       return addZerosToNumber(this.pokemon);
     },
     getPokemonName() {
-      return this.pokemon.name;
+      return removeDashFromString(this.pokemon.name);
     },
     getPokemonImg() {
       return getImgHighQuality(this.pokemon);
@@ -296,6 +296,8 @@ export default {
       this.pokemonId = isThereNextPokemon
         ? nextId
         : this.getPokemons[0].id;
+
+      this.setPokemonDetails({ id: this.pokemonId });
     },
     previousPokemon() {
       // eslint-disable-next-line no-plusplus
@@ -308,6 +310,8 @@ export default {
       this.pokemonId = isTherePreviousPokemon
         ? previousId
         : this.getPokemons[lastIndex].id;
+
+      this.setPokemonDetails({ id: this.pokemonId });
     },
   },
 };

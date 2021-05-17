@@ -10,10 +10,11 @@
       <v-data-table
         dense
         fixed-header
+        hide-default-header
         hide-default-footer
         :headers="headers"
         :items="desserts"
-        :items-per-page="4"
+        :items-per-page="itemsPerPage"
         :page.sync="page"
         class="elevation-1"
         @page-count="pageCount = $event"
@@ -22,7 +23,7 @@
       <v-pagination
         v-model="page"
         :length="pageCount"
-        :total-visible="5"
+        :total-visible="totalVisible"
         color="blue lighten-1"
       ></v-pagination>
     </div>
@@ -30,6 +31,7 @@
 </template>
 
 <script>
+import { removeDashFromString } from '@/utils/formatter';
 import { mapGetters } from 'vuex';
 
 export default {
@@ -63,13 +65,17 @@ export default {
     },
     desserts() {
       const allMoves = this.pokemon.moves;
-      const moves = allMoves.map((move) => {
-        console.log('move.name: ', move.name);
 
-        return { move: move.name }; // undefined
-      });
-
-      return moves;
+      return allMoves.map((each) => ({ move: removeDashFromString(each.move.name) }));
+    },
+    isMobile() {
+      return this.$vuetify.breakpoint.smAndDown;
+    },
+    itemsPerPage() {
+      return this.isMobile ? 3 : 4;
+    },
+    totalVisible() {
+      return this.isMobile ? 3 : 5;
     },
   },
 };

@@ -23,7 +23,7 @@
       </div>
 
       <div class="card_name">
-        {{ name }}
+        {{ pokemonName }}
       </div>
 
       <div class="card_types">
@@ -43,6 +43,7 @@
 
 <script>
 import Loading from '@/components/Loading.vue';
+import { removeDashFromString } from '@/utils/formatter';
 import { getCardBackgroundColor, getSolidColor } from '@/utils/color';
 import { mapActions } from 'vuex';
 
@@ -72,6 +73,9 @@ export default {
   computed: {
     isThereData() {
       return this.id && this.name && this.types && this.img;
+    },
+    pokemonName() {
+      return removeDashFromString(this.name);
     },
   },
   methods: {

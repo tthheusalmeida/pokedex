@@ -4,3 +4,10 @@ export function addZerosToNumber(number) {
   const zero = 3 - id.toString().length + 1;
   return Array(+(zero > 0 && zero)).join('0') + id;
 }
+
+export function removeDashFromString(string) {
+  return string
+    .split('-')
+    .map((element) => element.charAt(0).toUpperCase() + element.slice(1))
+    .join(' ');
+}
