@@ -17,9 +17,9 @@
           class="exploration_buttons_button rounded-0 rounded"
           @click="currentDisplay = getDisplay(index)"
         >
-        <v-icon color="grey lighten-4">
-          mdi-{{ iconToExplorationButon(index) }}
-        </v-icon>
+          <v-icon color="grey lighten-4">
+            mdi-{{ iconToExplorationButon(index) }}
+          </v-icon>
         </v-btn>
       </div>
     </div>
@@ -74,7 +74,6 @@
 <script>
 import Slices from '@/components/base/Slices.vue';
 import Moves from '@/components/exploration/Moves.vue';
-// import Evolutions from '@/components/exploration/Evolutions.vue';
 import HeldItems from '@/components/exploration/HeldItems.vue';
 
 export default {
@@ -90,29 +89,46 @@ export default {
       displays: [
         Moves,
         HeldItems,
-        Moves,
-        HeldItems,
-        HeldItems,
       ],
       icons: [{
         name: 'Moves',
         icon: 'format-list-bulleted-square',
       },
       {
-        name: 'Evolution',
-        icon: 'chart-timeline-variant',
-      },
-      {
-        name: 'About',
-        icon: 'book-account',
-      },
-      {
-        name: 'Where to Find',
-        icon: 'map-search',
-      },
-      {
         name: 'Held Item',
         icon: 'hand-heart',
+      },
+      {
+        name: '',
+        icon: '',
+      },
+      {
+        name: '',
+        icon: '',
+      },
+      {
+        name: '',
+        icon: '',
+      },
+      {
+        name: '',
+        icon: '',
+      },
+      {
+        name: '',
+        icon: '',
+      },
+      {
+        name: '',
+        icon: '',
+      },
+      {
+        name: '',
+        icon: '',
+      },
+      {
+        name: '',
+        icon: '',
       }],
     };
   },
@@ -186,7 +202,7 @@ export default {
   },
   methods: {
     getDisplay(index) {
-      return this.displays[index];
+      return this.displays[index] ? this.displays[index] : this.currentDisplay;
     },
     iconToExplorationButon(index) {
       return this.icons[index].icon;
