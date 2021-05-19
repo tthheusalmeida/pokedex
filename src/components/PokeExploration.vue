@@ -229,6 +229,10 @@ export default {
     &_buttons {
       &_button {
         margin-bottom: calc(1vw - 5px);
+
+        @media screen and (max-width: 800px) {
+          margin-bottom: calc(2vw - 5px);
+        }
       }
     }
 
