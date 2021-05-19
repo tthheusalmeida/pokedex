@@ -3,7 +3,39 @@
     <PokedexHeader />
 
     <PokeList v-if="showList"/>
-    <PokeDetails v-else-if="showDetails"/>
+
+    <v-container
+      v-else-if="showDetails"
+      class="information pr-5"
+    >
+      <v-row
+        no-gutters
+        class="ma-2"
+        v-if="!isMobile"
+      >
+        <v-col cols="6">
+          <PokeDetails />
+        </v-col>
+
+        <v-col cols="1"></v-col>
+
+        <v-col cols="5">
+          <PokeExploration />
+        </v-col>
+      </v-row>
+
+      <v-col
+        no-gutters
+        class="ma-2"
+        v-else
+      >
+        <PokeDetails />
+
+        <v-divider class="grey lighten-3 mb-5"></v-divider>
+
+        <PokeExploration />
+      </v-col>
+    </v-container>
   </div>
 </template>
 
@@ -11,6 +43,7 @@
 import PokedexHeader from '@/components/PokedexHeader.vue';
 import PokeList from '@/components/PokeList.vue';
 import PokeDetails from '@/components/PokeDetails.vue';
+import PokeExploration from '@/components/PokeExploration.vue';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
@@ -19,6 +52,12 @@ export default {
     PokedexHeader,
     PokeList,
     PokeDetails,
+    PokeExploration,
+  },
+  data() {
+    return {
+      page: 1,
+    };
   },
   created() {
     this.fetchPokemonsData();
@@ -32,6 +71,9 @@ export default {
     },
     showDetails() {
       return this.getDetails;
+    },
+    isMobile() {
+      return this.$vuetify.breakpoint.smAndDown;
     },
   },
   methods: {
@@ -51,6 +93,10 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  .information {
+    display: grid;
   }
 
 </style>

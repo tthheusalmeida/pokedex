@@ -18,9 +18,8 @@ export default {
 
 <style lang="scss">
   .pokedex {
-    height: 220px;
+    height: 210px;
     width: 100vw;
-    margin-bottom: 10px;
     padding: 0;
     background: var(--darkest-ruby-red);
 

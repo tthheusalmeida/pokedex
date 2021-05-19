@@ -65,11 +65,8 @@
         </v-btn>
       </div>
 
-      <div>
-        <div class="details_info_slices">
-          <div class="details_info_slices_one"></div>
-          <div class="details_info_slices_two"></div>
-        </div>
+      <div class="mr-2">
+        <Slices :options="slicesOptions"/>
 
         <div
           v-show="!toogleInfo"
@@ -95,8 +92,8 @@
       <div class="details_info_buttons">
         <v-btn
           fab
-          :height="bottonSize.height"
-          :width="bottonSize.width"
+          :height="buttonSize.height"
+          :width="buttonSize.width"
           elevation="10"
           class="grey darken-4 rounded-0 rounded-t-lg"
           @click.prevent="toggleDetailsInfo"
@@ -106,8 +103,8 @@
         <div class="details_info_buttons_mid">
           <v-btn
             fab
-            :height="bottonSize.height"
-            :width="bottonSize.width"
+            :height="buttonSize.height"
+            :width="buttonSize.width"
             elevation="10"
             class="grey darken-4 rounded-0 rounded-l-lg"
             @click.prevent="previousPokemon"
@@ -116,8 +113,8 @@
 
           <v-btn
             fab
-            :height="bottonSize.height"
-            :width="bottonSize.width"
+            :height="buttonSize.height"
+            :width="buttonSize.width"
             elevation="10"
             class="grey darken-4 rounded-0 disable-button"
           >
@@ -125,8 +122,8 @@
 
           <v-btn
             fab
-            :height="bottonSize.height"
-            :width="bottonSize.width"
+            :height="buttonSize.height"
+            :width="buttonSize.width"
             elevation="10"
             class="grey darken-4 rounded-0 rounded-r-lg"
             @click.prevent="nextPokemon"
@@ -136,8 +133,8 @@
 
         <v-btn
           fab
-          :height="bottonSize.height"
-          :width="bottonSize.width"
+          :height="buttonSize.height"
+          :width="buttonSize.width"
           elevation="10"
           class="grey darken-4 rounded-0 rounded-b-lg"
           @click.prevent="toggleDetailsInfo"
@@ -151,7 +148,8 @@
 <script>
 import PolarChart from '@/components/PolarChart.vue';
 import PokeAttributes from '@/components/PokeAttributes.vue';
-import { addZerosToNumber } from '@/utils/formatter';
+import Slices from '@/components/base/Slices.vue';
+import { addZerosToNumber, removeDashFromString } from '@/utils/formatter';
 import { getCardBackgroundColor, getSolidColor } from '@/utils/color';
 import { getImgHighQuality } from '@/utils/img';
 import { mapGetters, mapActions } from 'vuex';
@@ -161,6 +159,7 @@ export default {
   components: {
     PolarChart,
     PokeAttributes,
+    Slices,
   },
   data() {
     return {
@@ -186,7 +185,7 @@ export default {
       return addZerosToNumber(this.pokemon);
     },
     getPokemonName() {
-      return this.pokemon.name;
+      return removeDashFromString(this.pokemon.name);
     },
     getPokemonImg() {
       return getImgHighQuality(this.pokemon);
@@ -237,17 +236,30 @@ export default {
     isMobile() {
       return this.$vuetify.breakpoint.smAndDown;
     },
-    bottonSize() {
+    buttonSize() {
       if (this.isMobile) {
         return {
-          width: 25,
-          height: 25,
+          width: 23,
+          height: 23,
         };
       }
 
       return {
-        width: 35,
-        height: 35,
+        width: 28,
+        height: 28,
+      };
+    },
+    slicesOptions() {
+      return {
+        styles: {
+          slices: {
+            justifyContent: 'space-around',
+          },
+        },
+        colors: [
+          'var(--darker-ruby-red)',
+          'var(--card-dark-blue)',
+        ],
       };
     },
   },
@@ -282,6 +294,8 @@ export default {
       this.pokemonId = isThereNextPokemon
         ? nextId
         : this.getPokemons[0].id;
+
+      this.setPokemonDetails({ id: this.pokemonId });
     },
     previousPokemon() {
       // eslint-disable-next-line no-plusplus
@@ -294,6 +308,8 @@ export default {
       this.pokemonId = isTherePreviousPokemon
         ? previousId
         : this.getPokemons[lastIndex].id;
+
+      this.setPokemonDetails({ id: this.pokemonId });
     },
   },
 };
@@ -302,14 +318,9 @@ export default {
 <style lang="scss">
   .details {
     text-transform: capitalize;
-    margin-top: 20px;
-    width: calc(100vw - 20px);
+    width: 100%;
     border-radius: 8px;
     margin-bottom: 20px;
-
-    @media not screen and (max-width: 800px) {
-      width: 650px;
-    }
 
     &_header {
       width: 100%;
@@ -322,15 +333,10 @@ export default {
     }
 
     &_display {
-      padding: 0 45px 45px;
+      padding: 0 25px 25px;
       border-radius: 0 0 8px 8px;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
       box-shadow: var(--card-black) 0px 4px 4px -3px;
-
-      @media screen and (max-width: 700px) {
-        padding: 0 25px 25px;
-        margin-bottom: 20px;
-      }
 
       &_info,
       &_img,
@@ -370,54 +376,13 @@ export default {
     &_info {
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
-
-      &_slices {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        margin-bottom: 40px;
-
-        @media screen and (max-width: 700px) {
-          margin-bottom: 20px;
-        }
-
-        &_one,
-        &_two {
-          width: 150px;
-          padding: 8px 10px;
-          border-radius: 12px;
-          box-shadow: var(--card-black) 0px 2px 7px -2px;
-
-          @media screen and (max-width: 700px) {
-            width: 70px;
-          }
-        }
-
-        &_one {
-          background: var(--darker-ruby-red);
-        }
-
-        &_two {
-          background: var(--card-dark-blue);
-        }
-      }
+      justify-content: space-around;
 
       &_sound {
         margin: 10px;
 
         @media screen and (max-width: 700px) {
           margin: 0;
-        }
-      }
-
-      &_stats{
-        width: 360;
-        height: 310;
-
-        @media screen and (max-width: 700px) {
-          width: 230px;
-          height: 210px;
         }
       }
 
@@ -429,16 +394,11 @@ export default {
       }
 
       &_buttons {
-        padding: 10px;
+        widows: 95px;
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
-
-        @media screen and (max-width: 700px) {
-          padding: 1;
-          width: 80px;
-        }
 
         &_mid {
           display: flex;
@@ -448,7 +408,7 @@ export default {
     }
   }
 
-  .disable-{
+  .disable-button{
     pointer-events: none;
   }
 
