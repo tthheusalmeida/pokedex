@@ -1,10 +1,13 @@
 <template>
   <div class="exploration">
-    <div class="exploration_display">
+    <div class="exploration_display grey darken-4">
+      <keep-alive>
+        <component :is="currentDisplay"></component>
+      </keep-alive>
     </div>
 
     <div class="exploration_buttons d-flex flex-wrap justify-space-around">
-      <div v-for="n in 10" :key="n">
+      <div v-for="(icon, index) in icons" :key="index">
         <v-btn
           fab
           :width="buttonSize.width"
@@ -12,15 +15,17 @@
           elevation="10"
           color="blue lighten-1"
           class="exploration_buttons_button rounded-0 rounded"
+          @click="currentDisplay = getDisplay(index)"
         >
+          <v-icon color="grey lighten-4">
+            mdi-{{ iconToExplorationButon(index) }}
+          </v-icon>
         </v-btn>
       </div>
     </div>
 
     <div>
-      <Slices
-        :options="slicesOptions"
-      />
+      <Slices :options="slicesOptions"/>
     </div>
 
     <div class="exploration_buttons_small d-flex justify-space-between pt-10">
@@ -32,7 +37,7 @@
             :height="buttonSize.height"
             elevation="10"
             color="grey lighten-1"
-            class="exploration_buttons_button rounded-0 rounded ma-1"
+            class="exploration_buttons_button disable-button rounded-0 rounded ma-1"
           >
           </v-btn>
         </div>
@@ -58,7 +63,7 @@
           :height="bigButtonSize.height"
           elevation="10"
           color="grey darken-4"
-          class="exploration_buttons_button rounded-0 rounded ma-1"
+          class="exploration_buttons_button rounded-0 rounded ma-1 disable-button"
         >
         </v-btn>
       </div>
@@ -68,11 +73,64 @@
 
 <script>
 import Slices from '@/components/base/Slices.vue';
+import Moves from '@/components/exploration/Moves.vue';
+import HeldItems from '@/components/exploration/HeldItems.vue';
 
 export default {
   name: 'PokeExploration',
   components: {
     Slices,
+    Moves,
+    HeldItems,
+  },
+  data() {
+    return {
+      currentDisplay: Moves,
+      displays: [
+        Moves,
+        HeldItems,
+      ],
+      icons: [{
+        name: 'Moves',
+        icon: 'format-list-bulleted-square',
+      },
+      {
+        name: 'Held Item',
+        icon: 'hand-heart',
+      },
+      {
+        name: '',
+        icon: '',
+      },
+      {
+        name: '',
+        icon: '',
+      },
+      {
+        name: '',
+        icon: '',
+      },
+      {
+        name: '',
+        icon: '',
+      },
+      {
+        name: '',
+        icon: '',
+      },
+      {
+        name: '',
+        icon: '',
+      },
+      {
+        name: '',
+        icon: '',
+      },
+      {
+        name: '',
+        icon: '',
+      }],
+    };
   },
   computed: {
     buttonSize() {
@@ -142,6 +200,17 @@ export default {
       };
     },
   },
+  methods: {
+    getDisplay(index) {
+      return this.displays[index] ? this.displays[index] : this.currentDisplay;
+    },
+    iconToExplorationButon(index) {
+      return this.icons[index].icon;
+    },
+    nameToExplorationButon(index) {
+      return this.icons[index].name;
+    },
+  },
 };
 </script>
 
@@ -150,10 +219,11 @@ export default {
     width: 100%;
 
     &_display {
-      background: var(--card-black);
       height: 250px;
       border-radius: 4px;
       margin-bottom: 40px;
+      padding: 10px;
+      color: var(--card-white);
     }
 
     &_buttons {
@@ -164,7 +234,7 @@ export default {
 
   }
 
-  .disable-button{
+  .disable-button {
     pointer-events: none;
   }
 
