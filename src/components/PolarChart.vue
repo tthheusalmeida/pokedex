@@ -43,7 +43,7 @@ export default {
       let size = '80%';
 
       if (this.isMobile) {
-        width = this.viewWidthToPixel(23.7);
+        width = this.viewWidthToPixel(46.5);
         size = '40%';
       } else if (this.isTable) {
         width = this.viewWidthToPixel(23.5);
