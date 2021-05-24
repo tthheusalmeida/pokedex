@@ -73,7 +73,7 @@ async function fetchGenerations() {
   return generationsData.shift();
 }
 
-async function createPokemonRequests() {
+async function fetchPokemonsByGenerations() {
   const rawData = await fetchGenerations();
 
   let newRawData = [];
@@ -91,23 +91,17 @@ async function createPokemonRequests() {
     newRawData.push(pokemons);
   });
 
-  return {
-    regions,
-    pokemonsRequest: newRawData,
-  };
-}
-
-async function resolvedPokemonRequests() {
-  const { regions, pokemonsRequest } = await createPokemonRequests();
-
   let resolvedData = [];
 
-  await Promise.all(pokemonsRequest)
-    .then((resolved) => resolvedData.push(resolved));
+  await Promise.all(newRawData)
+    .then((resolved) => {
+      console.log('[pokeApi] resolved: ', resolved);
+      return resolvedData.push(resolved);
+    });
 
   resolvedData = resolvedData.shift();
 
-  for (let index = 0; index < pokemonsRequest.length; index++) {
+  for (let index = 0; index < newRawData.length; index++) {
     regions[index].pokemons = resolvedData[index];
   }
 
@@ -115,7 +109,7 @@ async function resolvedPokemonRequests() {
 }
 
 export async function getPokemonsData() {
-  const data = await resolvedPokemonRequests();
+  const data = await fetchPokemonsByGenerations();
 
   return data;
 }

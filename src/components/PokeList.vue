@@ -74,6 +74,7 @@ export default {
     return {
       searchPokemonLabel: 'Search Pokémon',
       searchPokemon: '',
+      selected: { text: 'Kanto', value: 'kanto' },
     };
   },
   computed: {
@@ -97,6 +98,7 @@ export default {
         return this.getPokemons
           .filter(({ name }) => name.toLowerCase().includes(this.searchPokemon.toLowerCase()));
       }
+      console.log('[pokeList] getPokemon: ', this.getPokemons[0]);
 
       return this.getPokemons;
     },
@@ -110,19 +112,10 @@ export default {
 
       return allRegions;
     },
-    selected: {
-      get() {
-        const data = this.selectPokemonGeneration[0];
-
-        // this.setPokemonsData(data);
-
-        return data;
-      },
-      set(newValue) {
-        console.log('newValue: ', newValue);
-
-        // this.setPokemonsData(newValue);
-      },
+  },
+  watch: {
+    selected() {
+      this.setPokemonsData(this.selected);
     },
   },
   methods: {

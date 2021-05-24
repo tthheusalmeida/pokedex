@@ -19,15 +19,18 @@ const getters = {
 };
 
 const actions = {
-  async fetchPokemonsByGenerations({ commit }) {
+  async fetchPokemonsByGenerations({ commit, dispatch }) {
     state.requestStatus = false;
     const data = await getPokemonsData();
 
     commit('setGenerations', data);
-    commit('setPokemons', 'kanto');
+
+    const [firstRegion] = data.regions;
+
+    dispatch('setPokemonsData', { value: firstRegion.name });
   },
 
-  async setPokemonsData({ commit }, payload) {
+  setPokemonsData({ commit }, payload) {
     commit('setPokemons', payload);
   },
 };
@@ -35,29 +38,19 @@ const actions = {
 const mutations = {
   setGenerations(state, payload) {
     state.generations = payload;
-
-    state.requestStatus = true;
   },
 
   setPokemons(state, payload) {
     const { regions } = state.generations;
-
-    if (payload === 'all') {
-      const allData = regions
-        .filter(({ pokemons }) => pokemons);
-
-      const allPokemons = allData
-        .map(({ pokemons }) => pokemons)
-        .flat(2);
-
-      state.pokemons = allPokemons;
-    }
 
     const { pokemons } = regions
       .filter(({ name }) => name === payload.value)
       .shift();
 
     state.pokemons = pokemons;
+    state.requestStatus = true;
+
+    console.log('[pokemons] state.pokemons: ', state.pokemons[0]);
   },
 };
 
