@@ -1,5 +1,5 @@
 <template>
-  <v-row no-gutters>
+  <v-row no-gutters class="pokelist">
     <v-col v-if="getRequestStatus">
       <v-row no-gutters class="pr-4">
         <v-col no-gutters>
@@ -137,6 +137,10 @@ export default {
 </script>
 
 <style lang="scss">
+  .pokelist {
+    min-height: 74vh;
+  }
+
   .search-field {
     width: 260px;
   }
