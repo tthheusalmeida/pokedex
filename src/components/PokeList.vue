@@ -79,8 +79,8 @@ export default {
   },
   computed: {
     ...mapGetters('pokemon', [
+      'getRegions',
       'getPokemons',
-      'getGenerations',
       'getRequestStatus',
     ]),
     requestStatus() {
@@ -98,29 +98,26 @@ export default {
         return this.getPokemons
           .filter(({ name }) => name.toLowerCase().includes(this.searchPokemon.toLowerCase()));
       }
-      console.log('[pokeList] getPokemon: ', this.getPokemons[0]);
 
       return this.getPokemons;
     },
     selectPokemonGeneration() {
-      const { regions } = this.getGenerations;
+      const regions = this.getRegions.filter(({ name }) => name);
 
       const allRegions = regions
         .map(({ name }) => ({ text: removeDashFromString(name), value: name }));
-
-      allRegions.push({ text: 'All', value: 'all' });
 
       return allRegions;
     },
   },
   watch: {
     selected() {
-      this.setPokemonsData(this.selected);
+      this.registerPokemons(this.selected);
     },
   },
   methods: {
     ...mapActions('pokemon', [
-      'setPokemonsData',
+      'registerPokemons',
     ]),
     getPokemonId(pokemon) {
       return addZerosToNumber(pokemon);

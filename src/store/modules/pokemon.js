@@ -54,7 +54,6 @@ const mutations = {
 
   setPokemons(state, payload) {
     state.pokemons = payload;
-    console.log('pokemons: ', state.pokemons);
     state.requestStatus = true;
   },
 };
