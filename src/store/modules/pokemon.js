@@ -28,7 +28,10 @@ const actions = {
 
   async registerPokemons({ commit, dispatch }, payload) {
     state.requestStatus = false;
-    await dispatch('registerRegions');
+
+    if (state.regions.length === 0) {
+      await dispatch('registerRegions');
+    }
 
     let pokemons = [];
 
@@ -51,6 +54,7 @@ const mutations = {
 
   setPokemons(state, payload) {
     state.pokemons = payload;
+    console.log('pokemons: ', state.pokemons);
     state.requestStatus = true;
   },
 };
