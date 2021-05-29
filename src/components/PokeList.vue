@@ -74,7 +74,7 @@ export default {
     return {
       searchPokemonLabel: 'Search Pokémon',
       searchPokemon: '',
-      selected: { text: 'Kanto', value: 'kanto' },
+      selected: { text: '', value: '' },
     };
   },
   computed: {
