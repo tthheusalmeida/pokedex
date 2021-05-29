@@ -1,7 +1,7 @@
 <template>
   <v-row no-gutters>
     <v-col v-if="getRequestStatus">
-      <v-row class="pr-4">
+      <v-row no-gutters class="pr-4">
         <v-col no-gutters>
           <div class="d-flex flex-wrap justify-center align-center">
             <div class="search-field">
@@ -53,7 +53,7 @@
       </v-row>
     </v-col>
 
-    <Loading v-else />
+    <Loading class="loading" v-else />
   </v-row>
 </template>
 
@@ -139,5 +139,12 @@ export default {
 <style lang="scss">
   .search-field {
     width: 260px;
+  }
+
+  .loading {
+    height: 74vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 </style>
