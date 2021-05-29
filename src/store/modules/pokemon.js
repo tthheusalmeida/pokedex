@@ -1,34 +1,57 @@
+/* eslint-disable prefer-const */
 /* eslint-disable no-var */
 /* eslint-disable arrow-parens */
 /* eslint-disable no-shadow */
-import { fetchPokemonData } from '@/services/PokeApi';
+import {
+  getRegionsList,
+  getPokemonsByRegion,
+} from '@/services/PokeApi';
 
 const state = {
+  regions: [],
   pokemons: [],
   requestStatus: false,
 };
 
 const getters = {
+  getRegions: state => state.regions,
   getPokemons: state => state.pokemons,
   getRequestStatus: state => state.requestStatus,
 };
 
 const actions = {
-  async fetchPokemonsData({ commit }) {
-    var pokemonsRequest = [];
-    this.requestStatus = false;
-    for (let index = 1; index < 152; index += 1) {
-      pokemonsRequest.push(fetchPokemonData(index));
+  async registerRegions({ commit }) {
+    const regions = await getRegionsList();
+
+    commit('setRegions', regions);
+  },
+
+  async registerPokemons({ commit, dispatch }, payload) {
+    state.requestStatus = false;
+
+    if (state.regions.length === 0) {
+      await dispatch('registerRegions');
     }
 
-    await Promise.all(pokemonsRequest)
-      .then((value) => state.pokemons.push(value));
+    let pokemons = [];
 
-    commit('setPokemons', state.pokemons.shift());
+    if (!payload) {
+      const [{ name }] = state.regions;
+
+      pokemons = await getPokemonsByRegion(name);
+    } else {
+      pokemons = await getPokemonsByRegion(payload);
+    }
+
+    commit('setPokemons', pokemons);
   },
 };
 
 const mutations = {
+  setRegions(state, payload) {
+    state.regions = payload;
+  },
+
   setPokemons(state, payload) {
     state.pokemons = payload;
     state.requestStatus = true;

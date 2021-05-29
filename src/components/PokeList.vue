@@ -3,18 +3,34 @@
     <v-col v-if="getRequestStatus">
       <v-row class="pr-4">
         <v-col no-gutters>
-          <div class="d-flex justify-center">
+          <div class="d-flex flex-wrap justify-center align-center">
             <div class="search-field">
               <v-text-field
                 solo
                 dense
                 clearable
                 hide-details
-                color="grey lighten-1"
-                class="mt-2"
+                prepend-inner-icon="mdi-magnify"
+                color="black"
+                class="ma-2"
                 v-model="searchPokemon"
                 :label="searchPokemonLabel"
               />
+            </div>
+
+            <div>
+              <v-select
+                solo
+                dense
+                hide-details
+                label="Select Generation"
+                prepend-inner-icon="mdi-earth"
+                color="black"
+                class="ma-2"
+                v-model="selected"
+                :items="selectPokemonGeneration"
+                :menu-props="{ top: false, offsetY: true }"
+              ></v-select>
             </div>
           </div>
           <v-row
@@ -44,9 +60,9 @@
 <script>
 import PokeCard from '@/components/PokeCard.vue';
 import Loading from '@/components/base/Loading.vue';
-import { addZerosToNumber } from '@/utils/formatter';
+import { addZerosToNumber, removeDashFromString } from '@/utils/formatter';
 import { getImgLowQuality } from '@/utils/img';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'PokeList',
@@ -56,12 +72,14 @@ export default {
   },
   data() {
     return {
-      searchPokemonLabel: 'Type the Pokémon name or id',
+      searchPokemonLabel: 'Search Pokémon',
       searchPokemon: '',
+      selected: { text: '', value: '' },
     };
   },
   computed: {
     ...mapGetters('pokemon', [
+      'getRegions',
       'getPokemons',
       'getRequestStatus',
     ]),
@@ -83,8 +101,24 @@ export default {
 
       return this.getPokemons;
     },
+    selectPokemonGeneration() {
+      const regions = this.getRegions.filter(({ name }) => name);
+
+      const allRegions = regions
+        .map(({ name }) => ({ text: removeDashFromString(name), value: name }));
+
+      return allRegions;
+    },
+  },
+  watch: {
+    selected() {
+      this.registerPokemons(this.selected);
+    },
   },
   methods: {
+    ...mapActions('pokemon', [
+      'registerPokemons',
+    ]),
     getPokemonId(pokemon) {
       return addZerosToNumber(pokemon);
     },
