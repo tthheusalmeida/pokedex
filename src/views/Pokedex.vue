@@ -36,6 +36,28 @@
         <PokeExploration />
       </v-col>
     </v-container>
+
+    <div class="footer ">
+      <div class="flex black--text text-center justify-center ma-2">
+        <v-btn
+          icon
+          v-for="icon in icons"
+          :key="icon.value"
+          :href="icon.url"
+          target="_blank"
+          class="mx-4 white--text"
+
+        >
+          <v-icon size="24px">
+            {{ icon.value }}
+          </v-icon>
+        </v-btn>
+
+        <div class="white--text ma-2">
+          Made with ❤️ by Matheus Almeida
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -57,6 +79,14 @@ export default {
   data() {
     return {
       page: 1,
+      icons: [{
+        value: 'mdi-linkedin',
+        url: 'https://www.linkedin.com/in/matheus-almeida-602139182/',
+      },
+      {
+        value: 'mdi-github',
+        url: 'https://github.com/tthheusalmeida',
+      }],
     };
   },
   created() {
@@ -80,6 +110,9 @@ export default {
     ...mapActions('pokemon', [
       'registerPokemons',
     ]),
+    goToUrl(url) {
+      return url;
+    },
   },
 };
 </script>
@@ -97,6 +130,12 @@ export default {
 
   .information {
     display: grid;
+  }
+
+  .footer {
+    width: 100%;
+    margin-top: 10px;
+    background: var(--darkest-ruby-red);
   }
 
 </style>
