@@ -30,96 +30,53 @@ async function fetchData(url) {
 }
 
 /*
-  Functions to Generations
+  Functions to Regions
 */
-async function getGenerationList() {
-  const baseURL = 'https://pokeapi.co/api/v2/generation/';
-  const data = fetchData(baseURL);
+export async function getRegionsList() {
+  const baseURL = 'https://pokeapi.co/api/v2/region/';
+  const data = await fetchData(baseURL);
 
-  return data;
+  const { results } = data;
+
+  return results;
 }
 
-async function fetchAllGenerations() {
-  let generationslist = [];
-  generationslist.push(getGenerationList());
+async function fetchRegionData(regionName) {
+  const regionsUrlslist = await getRegionsList();
 
-  let resolvedList = [];
+  const { url } = regionsUrlslist.filter(({ name }) => name === regionName).shift();
 
-  await Promise.all(generationslist)
-    .then(([{ results }]) => resolvedList.push(results));
+  const regionPromise = await fetchData(url);
 
-  const [urls] = resolvedList;
-
-  return urls.map(({ url }) => url);
+  return regionPromise;
 }
 
-async function fetchGenerations() {
-  const generationsUrlslist = await fetchAllGenerations();
+export async function getPokemonsByRegion(regionName) {
+  const { main_generation } = await fetchRegionData(regionName);
+  const { pokemon_species } = await fetchData(main_generation.url);
 
-  let generationsListRequests = [];
+  const pokemonsRequest = [];
 
-  generationsUrlslist.forEach((url) => {
-    const ulrData = fetchData(url);
-    generationsListRequests.push(ulrData);
-  });
+  for (let index = 0; index < pokemon_species.length; index += 1) {
+    const regex = /-species/gi;
 
-  let generationsData = [];
+    const rawPokemonUrl = pokemon_species[index].url;
 
-  await Promise.all(generationsListRequests)
-    .then((generation) => {
-      generationsData.push(generation);
-    });
+    const pokemonUrl = rawPokemonUrl.replace(regex, '');
 
-  return generationsData.shift();
-}
-
-async function fetchPokemonsByGenerations() {
-  const rawData = await fetchGenerations();
-
-  let newRawData = [];
-  let regions = [];
-
-  await rawData.forEach((generation) => {
-    let { name } = generation.main_region;
-
-    let pokemons = generation.pokemon_species
-      .map(({ url }) => ({
-        request: fetchData(url),
-      }));
-
-    regions.push({ name, pokemons: [] });
-    newRawData.push(pokemons);
-  });
-
-  let resolvedData = [];
-
-  await Promise.all(newRawData)
-    .then((resolved) => {
-      console.log('[pokeApi] resolved: ', resolved);
-      return resolvedData.push(resolved);
-    });
-
-  resolvedData = resolvedData.shift();
-
-  for (let index = 0; index < newRawData.length; index++) {
-    regions[index].pokemons = resolvedData[index];
+    pokemonsRequest.push(fetchData(pokemonUrl));
   }
 
-  return { regions };
-}
+  const data = [];
 
-export async function getPokemonsData() {
-  const data = await fetchPokemonsByGenerations();
+  await Promise.all(pokemonsRequest)
+    .then((value) => {
+      data.push(value);
+    });
 
-  return data;
-}
+  const pokemonsData = data.shift();
 
-/*
-  Functions to Pokemons
-*/
-export async function fetchPokemonData(id) {
-  const baseURL = `https://pokeapi.co/api/v2/pokemon/${id}`;
-  const data = fetchData(baseURL);
+  pokemonsData.sort((a, b) => ((a.id > b.id) ? 1 : -1));
 
-  return data;
+  return pokemonsData;
 }

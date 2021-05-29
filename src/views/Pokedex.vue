@@ -60,7 +60,7 @@ export default {
     };
   },
   created() {
-    this.fetchPokemonsByGenerations();
+    this.registerPokemons();
   },
   computed: {
     ...mapGetters('card', [
@@ -78,7 +78,7 @@ export default {
   },
   methods: {
     ...mapActions('pokemon', [
-      'fetchPokemonsByGenerations',
+      'registerPokemons',
     ]),
   },
 };

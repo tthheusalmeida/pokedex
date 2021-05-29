@@ -3,54 +3,55 @@
 /* eslint-disable arrow-parens */
 /* eslint-disable no-shadow */
 import {
-  getPokemonsData,
+  getRegionsList,
+  getPokemonsByRegion,
 } from '@/services/PokeApi';
 
 const state = {
+  regions: [],
   pokemons: [],
-  generations: [],
   requestStatus: false,
 };
 
 const getters = {
+  getRegions: state => state.regions,
   getPokemons: state => state.pokemons,
-  getGenerations: state => state.generations,
   getRequestStatus: state => state.requestStatus,
 };
 
 const actions = {
-  async fetchPokemonsByGenerations({ commit, dispatch }) {
-    state.requestStatus = false;
-    const data = await getPokemonsData();
+  async registerRegions({ commit }) {
+    const regions = await getRegionsList();
 
-    commit('setGenerations', data);
-
-    const [firstRegion] = data.regions;
-
-    dispatch('setPokemonsData', { value: firstRegion.name });
+    commit('setRegions', regions);
   },
 
-  setPokemonsData({ commit }, payload) {
-    commit('setPokemons', payload);
+  async registerPokemons({ commit, dispatch }, payload) {
+    state.requestStatus = false;
+    await dispatch('registerRegions');
+
+    let pokemons = [];
+
+    if (!payload) {
+      const [{ name }] = state.regions;
+
+      pokemons = await getPokemonsByRegion(name);
+    } else {
+      pokemons = await getPokemonsByRegion(payload);
+    }
+
+    commit('setPokemons', pokemons);
   },
 };
 
 const mutations = {
-  setGenerations(state, payload) {
-    state.generations = payload;
+  setRegions(state, payload) {
+    state.regions = payload;
   },
 
   setPokemons(state, payload) {
-    const { regions } = state.generations;
-
-    const { pokemons } = regions
-      .filter(({ name }) => name === payload.value)
-      .shift();
-
-    state.pokemons = pokemons;
+    state.pokemons = payload;
     state.requestStatus = true;
-
-    console.log('[pokemons] state.pokemons: ', state.pokemons[0]);
   },
 };
 
