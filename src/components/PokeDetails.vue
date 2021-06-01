@@ -35,10 +35,10 @@
         <v-img
           width="50vw"
           :max-width="imgSize"
+          :min-width="imgSize"
           :src="getPokemonImg"
         ></v-img>
       </div>
-
       <div
         class="details_display_types"
         :style="backgroundColor(getPokemonTypes[0])"
