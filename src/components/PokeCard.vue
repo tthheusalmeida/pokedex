@@ -132,6 +132,7 @@ export default {
 
       img {
         width: 130px;
+        min-width: 130px;
       }
     }
 
