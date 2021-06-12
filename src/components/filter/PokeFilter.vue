@@ -65,7 +65,7 @@ export default {
           .filter(({ name }) => name.toLowerCase().includes(this.searchPokemon.toLowerCase()));
 
         this.registerPokemonsTemp(pokemonList);
-      } else if (this.searchPokemon === null) {
+      } else if (this.searchPokemon === null || this.searchPokemon === '') {
         this.registerPokemonsTemp(this.getPokemons);
       }
     },
