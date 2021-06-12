@@ -191,15 +191,12 @@ export default {
       return getImgHighQuality(this.pokemon);
     },
     getPokemonAttributes() {
-      // eslint-disable-next-line prefer-const
-      let attribute = [];
-
-      attribute.push({ name: 'base experience', value: this.pokemon.base_experience });
-      attribute.push({ name: 'height', value: this.pokemon.height });
-      attribute.push({ name: 'weight', value: this.pokemon.weight });
-      attribute.push({ name: 'abilities', value: this.pokemon.abilities });
-
-      return attribute;
+      return [
+        { name: 'base experience', value: this.pokemon.base_experience },
+        { name: 'height', value: this.pokemon.height },
+        { name: 'weight', value: this.pokemon.weight },
+        { name: 'abilities', value: this.pokemon.abilities },
+      ];
     },
     getPokemonsStats() {
       return this.pokemon.stats

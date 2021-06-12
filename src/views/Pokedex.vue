@@ -2,6 +2,7 @@
   <div class="container">
     <PokedexHeader />
 
+    <PokeFilter v-show="showList"/>
     <PokeList v-if="showList"/>
 
     <v-container
@@ -66,6 +67,7 @@ import PokedexHeader from '@/components/PokedexHeader.vue';
 import PokeList from '@/components/PokeList.vue';
 import PokeDetails from '@/components/PokeDetails.vue';
 import PokeExploration from '@/components/PokeExploration.vue';
+import PokeFilter from '@/components/filter/PokeFilter.vue';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
@@ -75,6 +77,7 @@ export default {
     PokeList,
     PokeDetails,
     PokeExploration,
+    PokeFilter,
   },
   data() {
     return {

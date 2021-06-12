@@ -10,12 +10,14 @@ import {
 const state = {
   regions: [],
   pokemons: [],
+  pokemonsTemp: [],
   requestStatus: false,
 };
 
 const getters = {
   getRegions: state => state.regions,
   getPokemons: state => state.pokemons,
+  getPokemonsTemp: state => state.pokemonsTemp,
   getRequestStatus: state => state.requestStatus,
 };
 
@@ -44,6 +46,11 @@ const actions = {
     }
 
     commit('setPokemons', pokemons);
+    dispatch('registerPokemonsTemp', pokemons);
+  },
+
+  async registerPokemonsTemp({ commit }, payload) {
+    commit('setPokemonsTemp', payload);
   },
 };
 
@@ -55,6 +62,10 @@ const mutations = {
   setPokemons(state, payload) {
     state.pokemons = payload;
     state.requestStatus = true;
+  },
+
+  setPokemonsTemp(state, payload) {
+    state.pokemonsTemp = payload;
   },
 };
 
