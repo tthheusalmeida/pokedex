@@ -3,9 +3,8 @@
 /* eslint-disable arrow-parens */
 /* eslint-disable no-shadow */
 import {
-  getRegionsList,
-  getPokemonsByRegion,
-  fetchPokemon,
+  fetchRegion,
+  fetchGeneration,
 } from '@/services/PokeApi';
 
 const state = {
@@ -22,7 +21,7 @@ const getters = {
 
 const actions = {
   async registerRegions({ commit }) {
-    const regions = await getRegionsList();
+    const regions = await fetchRegion();
 
     commit('setRegions', regions);
   },
@@ -37,20 +36,14 @@ const actions = {
     let pokemons = [];
 
     if (!payload) {
-      const [{ name }] = state.regions;
+      const [{ id }] = state.regions;
 
-      pokemons = await getPokemonsByRegion(name);
+      pokemons = await fetchGeneration(id);
     } else {
-      pokemons = await getPokemonsByRegion(payload);
+      pokemons = await fetchGeneration(payload);
     }
 
     commit('setPokemons', pokemons);
-  },
-
-  // TODO Remove this test function
-  async test(state, payload) {
-    const data = await fetchPokemon(payload);
-    console.log('data: ', data);
   },
 };
 

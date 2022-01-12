@@ -77,9 +77,6 @@ export default {
       selected: { text: '', value: '' },
     };
   },
-  updated() {
-    this.test(1);
-  },
   computed: {
     ...mapGetters('pokemon', [
       'getRegions',
@@ -108,7 +105,7 @@ export default {
       const regions = this.getRegions.filter(({ name }) => name);
 
       const allRegions = regions
-        .map(({ name }) => ({ text: removeDashFromString(name), value: name }));
+        .map(({ name, id }) => ({ text: removeDashFromString(name), value: id }));
 
       return allRegions;
     },
@@ -121,7 +118,6 @@ export default {
   methods: {
     ...mapActions('pokemon', [
       'registerPokemons',
-      'test',
     ]),
     getPokemonId(pokemon) {
       return addZerosToNumber(pokemon);

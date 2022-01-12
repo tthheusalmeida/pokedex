@@ -5,7 +5,17 @@
 import axios from 'axios';
 
 /*
-  Local functions
+  Constants
+*/
+
+export const END_POINT = {
+  POKEMON: 'pokemon',
+  REGION: 'region',
+  GENERATION: 'generation',
+};
+
+/*
+  Functions
 */
 async function fetchData(url) {
   const baseURL = url;
@@ -29,11 +39,8 @@ async function fetchData(url) {
   return data;
 }
 
-/*
-  Functions to Regions
-*/
-export async function fetchPokemon(id) {
-  let baseURL = 'https://pokeapi.co/api/v2/pokemon/';
+export async function fetchEndPointData(collection, id) {
+  let baseURL = `https://pokeapi.co/api/v2/${collection}/`;
 
   if (id) {
     baseURL = baseURL.concat(id);
@@ -41,33 +48,29 @@ export async function fetchPokemon(id) {
 
   const data = await fetchData(baseURL);
 
-  console.log('pokemon: ', data);
   return data;
 }
 
-export async function getRegionsList() {
-  const baseURL = 'https://pokeapi.co/api/v2/region/';
-  const data = await fetchData(baseURL);
+export async function fetchRegion(region) {
+  const rowData = await fetchEndPointData(END_POINT.REGION, region);
 
-  const { results } = data;
+  if (!region) {
+    const { results } = rowData;
 
-  return results;
+    return results.map((single, index) => ({ ...single, id: index + 1 }));
+  }
+
+  return rowData;
 }
 
-async function fetchRegionData(regionName) {
-  const regionsUrlslist = await getRegionsList();
+export async function fetchGeneration(generation) {
+  const rowData = await fetchEndPointData(END_POINT.GENERATION, generation);
 
-  const { url } = regionsUrlslist.filter(({ name }) => name === regionName).shift();
+  if (!generation) {
+    return rowData;
+  }
 
-  const regionPromise = await fetchData(url);
-
-  return regionPromise;
-}
-
-export async function getPokemonsByRegion(regionName) {
-  const { main_generation } = await fetchRegionData(regionName);
-  const { pokemon_species } = await fetchData(main_generation.url);
-
+  const { pokemon_species } = rowData;
   const pokemonsRequest = [];
 
   for (let index = 0; index < pokemon_species.length; index += 1) {
