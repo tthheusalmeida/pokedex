@@ -32,6 +32,19 @@ async function fetchData(url) {
 /*
   Functions to Regions
 */
+export async function fetchPokemon(id) {
+  let baseURL = 'https://pokeapi.co/api/v2/pokemon/';
+
+  if (id) {
+    baseURL = baseURL.concat(id);
+  }
+
+  const data = await fetchData(baseURL);
+
+  console.log('pokemon: ', data);
+  return data;
+}
+
 export async function getRegionsList() {
   const baseURL = 'https://pokeapi.co/api/v2/region/';
   const data = await fetchData(baseURL);

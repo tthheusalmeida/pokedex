@@ -5,6 +5,7 @@
 import {
   getRegionsList,
   getPokemonsByRegion,
+  fetchPokemon,
 } from '@/services/PokeApi';
 
 const state = {
@@ -44,6 +45,12 @@ const actions = {
     }
 
     commit('setPokemons', pokemons);
+  },
+
+  // TODO Remove this test function
+  async test(state, payload) {
+    const data = await fetchPokemon(payload);
+    console.log('data: ', data);
   },
 };
 
