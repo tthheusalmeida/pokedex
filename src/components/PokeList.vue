@@ -77,6 +77,9 @@ export default {
       selected: { text: '', value: '' },
     };
   },
+  async updated() {
+    await this.getPokemonIdsArray(this.selected || 1);
+  },
   computed: {
     ...mapGetters('pokemon', [
       'getRegions',
@@ -118,6 +121,7 @@ export default {
   methods: {
     ...mapActions('pokemon', [
       'registerPokemons',
+      'getPokemonIdsArray',
     ]),
     getPokemonId(pokemon) {
       return addZerosToNumber(pokemon);

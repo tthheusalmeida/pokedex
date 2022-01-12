@@ -5,6 +5,7 @@
 import {
   fetchRegion,
   fetchGeneration,
+  fetchGenerationAux,
 } from '@/services/PokeApi';
 
 const state = {
@@ -44,6 +45,12 @@ const actions = {
     }
 
     commit('setPokemons', pokemons);
+  },
+
+  async getPokemonIdsArray(state, payload) {
+    const rawData = await fetchGenerationAux(payload);
+
+    console.log('data: ', rawData);
   },
 };
 
