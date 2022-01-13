@@ -74,11 +74,11 @@ export default {
     return {
       searchPokemonLabel: 'Search Pokémon',
       searchPokemon: '',
-      selected: { text: '', value: '' },
+      selected: 1,
     };
   },
   async updated() {
-    await this.getPokemonIdsArray(this.selected || 1);
+    await this.getPokemonIdsArray(this.selected);
   },
   computed: {
     ...mapGetters('pokemon', [
