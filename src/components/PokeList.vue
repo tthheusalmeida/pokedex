@@ -37,6 +37,7 @@
             no-gutters
             class="pokemons d-flex flex-wrap justify-center mt-3"
           >
+            <!--
             <div
               v-for="(pokemon, index) in pokemons" :key="index"
             >
@@ -45,6 +46,16 @@
                 :name="getPokemonName(pokemon)"
                 :types="getPokemonTypes(pokemon)"
                 :img="getPokemonImg(pokemon)"
+                class="ma-2"
+              />
+            </div>
+            -->
+            <div
+              v-for="(pokemon, index) in pokemons" :key="index"
+            >
+              <PokeCard
+                :id="getPokemonId(pokemon)"
+                :name="getPokemonName(pokemon)"
                 class="ma-2"
               />
             </div>
@@ -61,7 +72,6 @@
 import PokeCard from '@/components/PokeCard.vue';
 import Loading from '@/components/base/Loading.vue';
 import { addZerosToNumber, removeDashFromString } from '@/utils/formatter';
-import { getImgLowQuality } from '@/utils/img';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
@@ -76,9 +86,6 @@ export default {
       searchPokemon: '',
       selected: 1,
     };
-  },
-  async updated() {
-    await this.getPokemonIdsArray(this.selected);
   },
   computed: {
     ...mapGetters('pokemon', [
@@ -121,19 +128,12 @@ export default {
   methods: {
     ...mapActions('pokemon', [
       'registerPokemons',
-      'getPokemonIdsArray',
     ]),
     getPokemonId(pokemon) {
       return addZerosToNumber(pokemon);
     },
     getPokemonName(pokemon) {
       return pokemon.name;
-    },
-    getPokemonTypes(pokemon) {
-      return pokemon.types.map((types) => types.type.name);
-    },
-    getPokemonImg(pokemon) {
-      return getImgLowQuality(pokemon) || '';
     },
   },
 };

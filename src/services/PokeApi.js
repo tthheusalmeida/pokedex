@@ -51,53 +51,7 @@ export async function fetchEndPointData(collection, id) {
   return data;
 }
 
-export async function fetchRegion(region) {
-  const rawData = await fetchEndPointData(END_POINT.REGION, region);
-
-  if (!region) {
-    const { results } = rawData;
-
-    return results.map((single, index) => ({ ...single, id: index + 1 }));
-  }
-
-  return rawData;
-}
-
 export async function fetchGeneration(generation) {
-  const rawData = await fetchEndPointData(END_POINT.GENERATION, generation);
-
-  if (!generation) {
-    return rawData;
-  }
-
-  const { pokemon_species } = rawData;
-  const pokemonsRequest = [];
-
-  for (let index = 0; index < pokemon_species.length; index += 1) {
-    const regex = /-species/gi;
-
-    const rawPokemonUrl = pokemon_species[index].url;
-
-    const pokemonUrl = rawPokemonUrl.replace(regex, '');
-
-    pokemonsRequest.push(fetchData(pokemonUrl));
-  }
-
-  const data = [];
-
-  await Promise.all(pokemonsRequest)
-    .then((value) => {
-      data.push(value);
-    });
-
-  const pokemonsData = data.shift();
-
-  pokemonsData.sort((a, b) => ((a.id > b.id) ? 1 : -1));
-
-  return pokemonsData;
-}
-
-export async function fetchGenerationAux(generation) {
   const rawData = await fetchEndPointData(END_POINT.GENERATION, generation);
 
   if (!generation) {
@@ -116,4 +70,22 @@ export async function fetchGenerationAux(generation) {
   data.sort((a, b) => a.id - b.id);
 
   return data;
+}
+
+export async function fetchPokemon(pokemon) {
+  const rawData = await fetchEndPointData(END_POINT.POKEMON, pokemon);
+
+  return rawData;
+}
+
+export async function fetchRegion(region) {
+  const rawData = await fetchEndPointData(END_POINT.REGION, region);
+
+  if (!region) {
+    const { results } = rawData;
+
+    return results.map((single, index) => ({ ...single, id: index + 1 }));
+  }
+
+  return rawData;
 }

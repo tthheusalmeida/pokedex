@@ -3,9 +3,9 @@
 /* eslint-disable arrow-parens */
 /* eslint-disable no-shadow */
 import {
-  fetchRegion,
   fetchGeneration,
-  fetchGenerationAux,
+  fetchPokemon,
+  fetchRegion,
 } from '@/services/PokeApi';
 
 const state = {
@@ -47,10 +47,10 @@ const actions = {
     commit('setPokemons', pokemons);
   },
 
-  async getPokemonIdsArray(state, payload) {
-    const rawData = await fetchGenerationAux(payload);
+  async getPokemon(state, payload) {
+    const pokemon = await Promise.resolve(fetchPokemon(payload));
 
-    console.log('data: ', rawData);
+    return pokemon;
   },
 };
 

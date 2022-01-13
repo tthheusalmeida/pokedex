@@ -45,12 +45,19 @@
 import Loading from '@/components/base/Loading.vue';
 import { removeDashFromString } from '@/utils/formatter';
 import { getCardBackgroundColor, getSolidColor } from '@/utils/color';
+import { getImgLowQuality } from '@/utils/img';
 import { mapActions } from 'vuex';
 
 export default {
   name: 'PokeCard',
   components: {
     Loading,
+  },
+  data() {
+    return {
+      pokemonData: {},
+      show: false,
+    };
   },
   props: {
     id: {
@@ -61,18 +68,27 @@ export default {
       type: String,
       required: true,
     },
-    types: {
-      type: Array,
-      required: true,
-    },
-    img: {
-      type: String,
-      required: true,
-    },
+  },
+  created() {
+    this.getData();
   },
   computed: {
+    pokemon: {
+      get() {
+        return this.pokemonData;
+      },
+      set(newValue) {
+        this.pokemonData = newValue;
+      },
+    },
+    types() {
+      return this.pokemon.types?.map(({ type }) => type.name);
+    },
+    img() {
+      return getImgLowQuality(this.pokemon);
+    },
     isThereData() {
-      return this.id && this.name && this.types && this.img;
+      return this.show && this.img;
     },
     pokemonName() {
       return removeDashFromString(this.name);
@@ -83,6 +99,18 @@ export default {
       'toggleDetails',
       'setPokemonDetails',
     ]),
+    ...mapActions('pokemon', [
+      'getPokemon',
+    ]),
+    async getData() {
+      const id = Number(this.id);
+
+      await this.getPokemon(id)
+        .then((response) => {
+          this.pokemon = response;
+          this.show = true;
+        });
+    },
     getTypeStyle(type) {
       return `
         color: var(--${type}-type);
