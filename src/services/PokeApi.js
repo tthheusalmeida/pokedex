@@ -98,16 +98,22 @@ export async function fetchGeneration(generation) {
 }
 
 export async function fetchGenerationAux(generation) {
-  const { pokemon_species } = await fetchEndPointData(END_POINT.GENERATION, generation);
+  const rawData = await fetchEndPointData(END_POINT.GENERATION, generation);
 
-  const rawData = pokemon_species.map(({ name, url }) => {
+  if (!generation) {
+    return rawData;
+  }
+
+  const { pokemon_species } = rawData;
+
+  const data = pokemon_species.map(({ name, url }) => {
     const regex = /\/([^/]+)\/?$/;
     const id = Number(url.match(regex)[1]);
 
     return { name, id };
   });
 
-  rawData.sort((a, b) => a.id - b.id);
+  data.sort((a, b) => a.id - b.id);
 
-  return rawData;
+  return data;
 }
