@@ -1,6 +1,6 @@
 <template>
   <v-row no-gutters class="pokelist">
-    <v-col>
+    <v-col v-if="requestStatus">
       <v-row no-gutters class="pr-4">
         <v-col no-gutters>
           <div class="d-flex flex-wrap justify-center align-center">
@@ -52,11 +52,14 @@
         </v-col>
       </v-row>
     </v-col>
+
+    <Loading class="loading" v-else />
   </v-row>
 </template>
 
 <script>
 import PokeCard from '@/components/PokeCard.vue';
+import Loading from '@/components/base/Loading.vue';
 import { addZerosToNumber, removeDashFromString } from '@/utils/formatter';
 import { getImgLowQuality } from '@/utils/img';
 import { mapGetters, mapActions } from 'vuex';
@@ -65,6 +68,7 @@ export default {
   name: 'PokeList',
   components: {
     PokeCard,
+    Loading,
   },
   data() {
     return {
@@ -80,7 +84,11 @@ export default {
     ...mapGetters('pokemon', [
       'getRegions',
       'getPokemons',
+      'getRequestStatus',
     ]),
+    requestStatus() {
+      return this.getRequestStatus;
+    },
     pokemons() {
       if (this.searchPokemon) {
         const isNumber = Number(this.searchPokemon);
