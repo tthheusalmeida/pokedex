@@ -123,16 +123,19 @@ export default {
     transition: all 0.2s ease;
 
     &_img {
+      $image-size: 130px;
+
       background: var(--card-gray);
       border-radius: 200%;
-      min-width: 130px;
+      min-width: $image-size;
       display: flex;
       align-items: center;
       justify-content: center;
 
       img {
-        width: 130px;
-        min-width: 130px;
+        width: $image-size;
+        min-width: $image-size;
+        min-height: $image-size;
       }
     }
 
