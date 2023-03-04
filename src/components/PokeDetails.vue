@@ -36,6 +36,7 @@
           width="50vw"
           :max-width="imgSize"
           :min-width="imgSize"
+          :min-height="imgSize"
           :src="getPokemonImg"
         ></v-img>
       </div>
