@@ -32,13 +32,20 @@ async function fetchData(url) {
 /*
   Functions to Regions
 */
+const EXCEPTIONS_REGIONS = [
+  'hisui',
+];
+
 export async function getRegionsList() {
   const baseURL = 'https://pokeapi.co/api/v2/region/';
   const data = await fetchData(baseURL);
 
   const { results } = data;
 
-  return results;
+  return results.filter((region) => {
+    const { name } = region;
+    return !EXCEPTIONS_REGIONS.includes(name);
+  });
 }
 
 async function fetchRegionData(regionName) {
