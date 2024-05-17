@@ -117,10 +117,12 @@ export default {
     width: 150px;
 
     border-radius: 8px;
-    box-shadow: var(--card-black) 0px 10px 15px -5px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+    rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: transform 0.2s ease;
 
     &_img {
       $image-size: 130px;
@@ -169,9 +171,9 @@ export default {
         padding: 4px 8px;
       }
     }
-  }
 
-  .card:hover {
-    transform: translateY(-10px);
+    &:hover {
+      transform: scale(1.1);
+    }
   }
 </style>
