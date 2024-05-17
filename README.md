@@ -47,7 +47,6 @@ The project was developed with the following technologies:
 - [Vuejs](https://vuejs.org/) The Progressive
 JavaScript Framework
 - [Vue Cli](https://cli.vuejs.org/) is a Standard Tooling for Vue.js Development
-- [Vuetify](https://vuetifyjs.com/) is a Vue UI Library with beautifully handcrafted Material Components
 - [Vuex](https://vuex.vuejs.org/) is a state management pattern and library for Vue.js applications
 - [ESLint](https://eslint.org/) statically analyzes your code to quickly find problems
 - [Lodash](https://lodash.com/) a modern JavaScript utility library delivering modularity, performance & extras.

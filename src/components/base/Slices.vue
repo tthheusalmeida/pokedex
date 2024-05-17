@@ -35,30 +35,29 @@ export default {
   methods: {
     sliceColor(color) {
       return {
-        background: `${color}`,
+        background: color,
       };
     },
   },
 };
 </script>
 
-<style lang="scss">
+<style lang="css">
   .slices {
     display: flex;
     flex-direction: row;
     margin-bottom: 40px;
     justify-content: space-around;
+  }
+  .slices_single{
+    width: calc(10vw - 10px);
+    max-width: 150px;
+    padding: 8px 10px;
+    border-radius: 12px;
+    box-shadow: var(--card-black) 0px 2px 7px -2px;
 
-    &_single{
-      width: calc(10vw - 10px);
-      max-width: 150px;
-      padding: 8px 10px;
-      border-radius: 12px;
-      box-shadow: var(--card-black) 0px 2px 7px -2px;
-
-      @media screen and (max-width: 700px) {
-        width: 70px;
-      }
+    @media screen and (max-width: 700px) {
+      width: 70px;
     }
   }
 </style>

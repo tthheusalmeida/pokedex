@@ -1,9 +1,7 @@
 <template>
-  <v-app>
-    <div id="app">
-      <Pokedex />
-    </div>
-  </v-app>
+  <div id="app">
+    <Pokedex />
+  </div>
 </template>
 
 <script>
@@ -18,8 +16,21 @@ export default {
 
 </script>
 
-<style lang="scss">
+<style lang="css">
   @import url('https://fonts.googleapis.com/css?family=Acme');
+  @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0');
+
+  .material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 1,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24,
+  }
+
+  .material-symbols-outlined {
+    color: rgba(0, 0, 0, 0.553);
+  }
 
   :root {
     --darkest-ruby-red: #7e2013;
@@ -72,6 +83,7 @@ export default {
     --dark-type: #FFFFFF;
     --background-dark-type: #707070;
 
+    --image-size: 130px;
   }
 
   body {
@@ -79,7 +91,8 @@ export default {
     padding: 0;
 
     height: 100%;
-    width: 100%;
+    width: calc(100vw - 16px);
+    overflow-x: hidden;
   }
 
   #app {
@@ -90,7 +103,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100vw;
+    width: calc(100vw - 16px);
     min-height: 100vh;
 
     background: var(--ruby-red);

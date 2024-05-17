@@ -1,30 +1,20 @@
 <template>
-  <v-row no-gutters class="pokelist">
-    <v-col no-gutters v-if="getRequestStatus">
-      <v-row no-gutters>
-        <v-col no-gutters>
-          <v-row
-            no-gutters
-            class="pokemons d-flex flex-wrap justify-center mt-3"
-          >
-            <div
-              v-for="(pokemon, index) in pokemons" :key="index"
-            >
-              <PokeCard
-                :id="getPokemonId(pokemon)"
-                :name="getPokemonName(pokemon)"
-                :types="getPokemonTypes(pokemon)"
-                :img="getPokemonImg(pokemon)"
-                class="ma-2"
-              />
-            </div>
-          </v-row>
-        </v-col>
-      </v-row>
-    </v-col>
+  <div class="pokelist">
+    <div v-if="getRequestStatus">
+      <div class="pokelist__content">
+        <div v-for="(pokemon, index) in pokemons" :key="index">
+          <PokeCard
+            :id="getPokemonId(pokemon)"
+            :name="getPokemonName(pokemon)"
+            :types="getPokemonTypes(pokemon)"
+            :img="getPokemonImg(pokemon)"
+          />
+        </div>
+      </div>
+    </div>
 
     <Loading class="loading" v-else />
-  </v-row>
+  </div>
 </template>
 
 <script>
@@ -71,9 +61,17 @@ export default {
 
 </script>
 
-<style lang="scss">
+<style lang="css">
   .pokelist {
     min-height: 74vh;
+  }
+
+  .pokelist__content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 24px;
+    padding: 0 8px;
   }
 
   .loading {

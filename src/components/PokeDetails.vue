@@ -1,22 +1,18 @@
 <template>
   <section class="details">
-    <div
-      class="details_header headline grey lighten-3"
-    >
-      <v-btn
-        icon
-        elevation="5"
-        class="ma-2 red darken-4"
+    <div class="details_header">
+      <button
+        class="details_header__button"
         @click="closePokemonDetails"
       >
-        <v-icon color="white">
-          mdi-keyboard-return
-        </v-icon>
-      </v-btn>
+        <span class="material-symbols-outlined button_icon">
+          keyboard_return
+        </span>
+      </button>
     </div>
 
-    <div class="details_display grey lighten-3">
-      <v-card-title
+    <div class="details_display">
+      <div
         class="details_display_info"
         :style="backgroundColor(getPokemonTypes[0])"
       >
@@ -26,19 +22,16 @@
         <h3 class="details_display_name">
           {{ getPokemonName }}
         </h3>
-      </v-card-title>
+      </div>
 
       <div
         class="details_display_img"
         :style="backgroundColor(getPokemonTypes[0])"
       >
-        <v-img
-          width="50vw"
-          :max-width="imgSize"
-          :min-width="imgSize"
-          :min-height="imgSize"
+        <img
+          :style="getImageSizes(imgSize)"
           :src="getPokemonImg"
-        ></v-img>
+        >
       </div>
       <div
         class="details_display_types"
@@ -56,17 +49,10 @@
 
     <div class="details_info">
       <div class="details_info_sound">
-        <v-btn
-          icon
-          disabled
-          :large="!isMobile"
-          elevation="10"
-          class="grey darken-4"
-        >
-        </v-btn>
+        <div></div>
       </div>
 
-      <div class="mr-2">
+      <div style="margin-right: 8px !important;">
         <Slices :options="slicesOptions"/>
 
         <div
@@ -91,56 +77,39 @@
       </div>
 
       <div class="details_info_buttons">
-        <v-btn
-          fab
+        <div
           :height="buttonSize.height"
           :width="buttonSize.width"
-          elevation="10"
-          class="grey darken-4 rounded-0 rounded-t-lg"
+          class="button_top"
           @click.prevent="toggleDetailsInfo"
-        >
-        </v-btn>
+        ></div>
 
         <div class="details_info_buttons_mid">
-          <v-btn
-            fab
+          <div
             :height="buttonSize.height"
             :width="buttonSize.width"
-            elevation="10"
-            class="grey darken-4 rounded-0 rounded-l-lg"
+            class="button_left"
             @click.prevent="previousPokemon"
-          >
-          </v-btn>
-
-          <v-btn
-            fab
+          ></div>
+          <div
             :height="buttonSize.height"
             :width="buttonSize.width"
-            elevation="10"
-            class="grey darken-4 rounded-0 disable-button"
-          >
-          </v-btn>
-
-          <v-btn
-            fab
+            class="button_mid"
+          ></div>
+          <div
             :height="buttonSize.height"
             :width="buttonSize.width"
-            elevation="10"
-            class="grey darken-4 rounded-0 rounded-r-lg"
+            class="button_right"
             @click.prevent="nextPokemon"
-          >
-          </v-btn>
+          ></div>
         </div>
 
-        <v-btn
-          fab
+        <div
           :height="buttonSize.height"
           :width="buttonSize.width"
-          elevation="10"
-          class="grey darken-4 rounded-0 rounded-b-lg"
+          class="button_bottom"
           @click.prevent="toggleDetailsInfo"
-        >
-        </v-btn>
+        ></div>
       </div>
     </div>
   </section>
@@ -229,10 +198,10 @@ export default {
       };
     },
     imgSize() {
-      return this.isMobile ? '200px' : '300px';
+      return '240px';
     },
     isMobile() {
-      return this.$vuetify.breakpoint.smAndDown;
+      return false;
     },
     buttonSize() {
       if (this.isMobile) {
@@ -271,10 +240,8 @@ export default {
       this.setPokemonDetails({});
     },
     getTypeStyle(type) {
-      return `
-        color: var(--${type}-type);
-        background: var(--background-${type}-type);
-      `;
+      // eslint-disable-next-line prefer-template
+      return 'color: var(--' + type + '-type); background: var(--background-' + type + '-type);';
     },
     toggleDetailsInfo() {
       this.toogleInfo = !this.toogleInfo;
@@ -309,105 +276,181 @@ export default {
 
       this.setPokemonDetails({ id: this.pokemonId });
     },
+    getImageSizes(size) {
+      // eslint-disable-next-line prefer-template
+      return 'width: ' + size + ';'
+      + ' max-width: ' + size + ';'
+      + ' min-width: ' + size + ';'
+      + ' min-height: ' + size + ';';
+    },
   },
 };
 </script>
 
-<style lang="scss">
+<style lang="css">
   .details {
     text-transform: capitalize;
     width: 100%;
     border-radius: 8px;
     margin-bottom: 20px;
+  }
 
-    &_header {
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: flex-end;
-      border-radius: 8px 8px 0 0;
-      height: 50px;
-    }
+  .details_header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    border-radius: 8px 8px 0 0;
+    height: 50px;
+    background-color: var(--card-white);
+  }
 
-    &_display {
-      padding: 0 25px 25px;
-      border-radius: 0 0 8px 8px;
-      margin-bottom: 20px;
-      box-shadow: var(--card-black) 0px 4px 4px -3px;
+  .details_header .details_header__button {
+    background-color: var(--ruby-red);
+    border-radius: 25px;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+    box-shadow: var(--card-black) 0px 4px 4px -3px;
+    margin-right: 8px;
 
-      &_info,
-      &_img,
-      &_types {
-        display: flex;
-        background: var(--card-white);
-      }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-      &_info {
-        height: 50px;
-        justify-content: space-between;
-        border-radius: 3px 3px 0 0;
-      }
+  .button_icon {
+    margin: 4px;
+    background-color: transparent;
+    color: var(--card-white) !important;
+  }
 
-      &_img {
-        flex-direction: row;
-        justify-content: center;
-      }
+  .details_display {
+    padding: 0 25px 25px;
+    border-radius: 0 0 8px 8px;
+    margin-bottom: 20px;
+    background-color: var(--card-white);
+    box-shadow: var(--card-black) 0px 4px 4px -3px;
+  }
 
-      &_types {
-        flex-direction: row;
-        justify-content: space-around;
-        border-radius: 0 0 3px 3px;
-        padding: 5px;
+  .details_display_info,
+  .details_display_img,
+  .details_display_types {
+    display: flex;
+    background: var(--card-white);
+    padding: 0 16px 16px 16px;
+  }
 
-        &_single {
-          text-align: center;
-          display: inline;
-          width: 100%;
-          padding: 4px 0;
-          margin: 8px;
-          border-radius: 15px;
-        }
-      }
-    }
+  .details_display_info {
+    height: 50px;
+    justify-content: space-between;
+    border-radius: 3px 3px 0 0;
+  }
 
-    &_info {
+  .details_display_img {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .details_display_types {
+    flex-direction: row;
+    justify-content: space-around;
+    border-radius: 0 0 3px 3px;
+    padding: 5px;
+  }
+
+  .details_display_types_single {
+    text-align: center;
+    display: inline;
+    width: 100%;
+    padding: 4px 0;
+    margin: 8px;
+    border-radius: 15px;
+  }
+
+  .details_info {
       display: flex;
       flex-direction: row;
       justify-content: space-around;
+  }
 
-      &_sound {
-        margin: 10px;
+  .details_info_sound {
+    margin: 10px;
+  }
 
-        @media screen and (max-width: 700px) {
-          margin: 0;
-        }
-      }
+  .details_info_sound div {
+    width: 42px;
+    height: 42px;
+    border-radius: 25px;
+    background-color: var(--card-black);
+  }
 
-      &_attributes {
-        display: flex;
-        flex-direction: column;
-        width: 360;
-        height: 310;
-      }
+  .details_attributes {
+    display: flex;
+    flex-direction: column;
+    width: 360;
+    height: 310;
+  }
 
-      &_buttons {
-        widows: 95px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
+  .details_info_buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 
-        &_mid {
-          display: flex;
-          flex-direction: row;
-        }
-      }
-    }
+  .details_buttons {
+    widows: 95px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .details_buttons_mid {
+    display: flex;
+    flex-direction: row;
   }
 
   .disable-button{
     pointer-events: none;
+  }
+
+  .details_info_buttons_mid {
+    display: flex;
+  }
+
+  .button_top,
+  .button_left,
+  .button_mid,
+  .button_right,
+  .button_bottom {
+    width: 28px;
+    height: 28px;
+    background-color: var(--card-black);
+    cursor: pointer;
+  }
+
+  .button_mi {
+    cursor: inherit;
+  }
+
+  .button_top {
+    border-radius: 8px 8px 0 0;
+  }
+
+  .button_left {
+    border-radius: 8px 0 0 8px;
+  }
+
+  .button_right {
+    border-radius: 0 8px 8px 0;
+  }
+
+  .button_bottom {
+    border-radius: 0 0 8px 8px;
   }
 
 </style>

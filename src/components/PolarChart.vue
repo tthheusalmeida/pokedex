@@ -31,24 +31,11 @@ export default {
     },
   },
   computed: {
-    isMobile() {
-      return this.$vuetify.breakpoint.smAndDown;
-    },
-    isTable() {
-      return this.$vuetify.breakpoint.mdAndDown;
-    },
     chartOptions() {
-      const height = 240;
-      let width = this.viewWidthToPixel(24.5);
-      let size = '80%';
+      const height = this.viewHeightToPixel(43.5);
+      const width = this.viewWidthToPixel(26);
+      const size = '80%';
 
-      if (this.isMobile) {
-        width = this.viewWidthToPixel(46.5);
-        size = '40%';
-      } else if (this.isTable) {
-        width = this.viewWidthToPixel(23.5);
-        size = '60%';
-      }
       const options = {
         chart: {
           renderTo: 'container',
@@ -118,13 +105,16 @@ export default {
   },
   methods: {
     viewWidthToPixel(vw) {
-      return (vw * this.$vuetify.breakpoint.width) / 100;
+      return (vw / 100) * window.innerWidth;
+    },
+    viewHeightToPixel(vw) {
+      return (vw * window.innerHeight) / 100;
     },
   },
 };
 </script>
 
-<style lang="scss">
+<style lang="css">
   .chart {
     display: flex;
     flex-direction: row;

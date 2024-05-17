@@ -28,11 +28,11 @@
 
       <div class="card_types">
         <div
-            class="type"
-            :style="getTypeStyle(type)"
-            v-for="(type, index) in types" :key="index"
-          >
-            {{ type }}
+          class="type"
+          :style="getTypeStyle(type)"
+          v-for="(type, index) in types" :key="index"
+        >
+          {{ type }}
         </div>
       </div>
     </div>
@@ -84,13 +84,16 @@ export default {
       'setPokemonDetails',
     ]),
     getTypeStyle(type) {
-      return `
-        color: var(--${type}-type);
-        background: var(--background-${type}-type);
-      `;
+      if (!type) {
+        return '';
+      }
+
+      // eslint-disable-next-line prefer-template
+      return 'color: var(--' + type + '-type); background: var(--background-' + type + '-type)';
     },
     getBorderStyle(type) {
-      return `border: 2px solid var(--background-${getSolidColor(type)}-type);`;
+      // eslint-disable-next-line prefer-template
+      return 'border: 2px solid var(--background-' + getSolidColor(type) + '-type);';
     },
     backgroundColor(type) {
       return getCardBackgroundColor(type);
@@ -104,7 +107,7 @@ export default {
 
 </script>
 
-<style lang="scss">
+<style lang="css">
   .card {
     display: flex;
     flex-direction: column;
@@ -114,6 +117,7 @@ export default {
     text-transform: capitalize;
     line-height: 1;
     padding: 8px;
+    margin: 8px;
     width: 150px;
 
     border-radius: 8px;
@@ -123,57 +127,57 @@ export default {
 
     cursor: pointer;
     transition: transform 0.2s ease;
-
-    &_img {
-      $image-size: 130px;
-
-      background: var(--card-gray);
-      border-radius: 200%;
-      min-width: $image-size;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      img {
-        width: $image-size;
-        min-width: $image-size;
-        min-height: $image-size;
-      }
-    }
-
-    &_id, &_name {
-      text-align: center;
-    }
-
-    &_id {
-      margin: 5px 42px 5px;
-      padding: 3px 6px;
-      border-radius: 8px;
-      align-content: flex-start;
-      background: var(--card-gray);
-    }
-
-    &_name {
-      font-size: 16px;
-      font-weight: bold;
-      margin: 8px 0 6px 0;
-    }
-
-    &_types {
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-
-      .type {
-        text-align: center;
-        display: inline;
-        border-radius: 5px;
-        padding: 4px 8px;
-      }
-    }
-
-    &:hover {
-      transform: scale(1.1);
-    }
   }
+
+  .card_img {
+    background: var(--card-gray);
+    border-radius: 200%;
+    min-width:  var(--image-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+  }
+
+  .card_img img {
+    width: var(--image-size);
+    min-width: var(--image-size);
+    min-height: var(--image-size);
+  }
+
+  .card_id, .card_name {
+    text-align: center;
+  }
+
+  .card_id {
+    margin: 5px 42px 5px;
+    padding: 3px 6px;
+    border-radius: 8px;
+    align-content: flex-start;
+    background: var(--card-gray);
+  }
+
+  .card_name {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 8px 0 6px 0;
+  }
+
+  .card_types {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .card_types:hover {
+    transform: scale(1.1);
+  }
+
+  .card_types .type {
+    text-align: center;
+    display: inline;
+    border-radius: 5px;
+    padding: 4px 8px;
+  }
+
 </style>

@@ -40,8 +40,10 @@ export function getHexColorFromRoot(options) {
   let colorFromRoot = '';
 
   const definedColor = isBackground
-    ? `--background-${type}-type`
-    : `--${type}-type`;
+    // eslint-disable-next-line prefer-template
+    ? '--background-' + type + '-type'
+    // eslint-disable-next-line prefer-template
+    : '--' + type + '-type';
 
   const rootColor = getComputedStyle(document.documentElement)
     .getPropertyValue(definedColor)
@@ -101,7 +103,8 @@ export function getCardBackgroundColor(type) {
       lighten: 32,
     });
 
-    return `background: ${color};`;
+    // eslint-disable-next-line prefer-template
+    return 'background: ' + color;
   }
   return 'background: var(--card-white);';
 }
