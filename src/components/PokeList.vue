@@ -13,13 +13,13 @@
       </div>
     </div>
 
-    <Loading class="loading" v-else />
+    <BaseLoading class="loading" v-else />
   </div>
 </template>
 
 <script>
 import PokeCard from '@/components/PokeCard.vue';
-import Loading from '@/components/base/Loading.vue';
+import BaseLoading from '@/components/base/BaseLoading.vue';
 import { addZerosToNumber } from '@/utils/formatter';
 import { getImgLowQuality } from '@/utils/img';
 import { mapGetters } from 'vuex';
@@ -28,7 +28,7 @@ export default {
   name: 'PokeList',
   components: {
     PokeCard,
-    Loading,
+    BaseLoading,
   },
   computed: {
     ...mapGetters('pokemon', [

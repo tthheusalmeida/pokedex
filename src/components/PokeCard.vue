@@ -37,12 +37,12 @@
       </div>
     </div>
 
-    <Loading v-else/>
+    <BaseLoading v-else/>
   </div>
 </template>
 
 <script>
-import Loading from '@/components/base/Loading.vue';
+import BaseLoading from '@/components/base/BaseLoading.vue';
 import { removeDashFromString } from '@/utils/formatter';
 import { getCardBackgroundColor, getSolidColor } from '@/utils/color';
 import { mapActions } from 'vuex';
@@ -50,7 +50,7 @@ import { mapActions } from 'vuex';
 export default {
   name: 'PokeCard',
   components: {
-    Loading,
+    BaseLoading,
   },
   props: {
     id: {

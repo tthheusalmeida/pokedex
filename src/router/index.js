@@ -1,14 +1,14 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Pokedex from '@/views/Pokedex.vue';
+import ViewPokedex from '@/views/ViewPokedex.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
-    name: 'Pokedex',
-    component: Pokedex,
+    name: 'ViewPokedex',
+    component: ViewPokedex,
   },
 ];
 

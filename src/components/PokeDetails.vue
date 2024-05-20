@@ -53,7 +53,7 @@
       </div>
 
       <div style="margin-right: 8px !important;">
-        <Slices :options="slicesOptions"/>
+        <BaseSlices :options="slicesOptions"/>
 
         <div
           v-show="!toogleInfo"
@@ -118,7 +118,7 @@
 <script>
 import PolarChart from '@/components/PolarChart.vue';
 import PokeAttributes from '@/components/PokeAttributes.vue';
-import Slices from '@/components/base/Slices.vue';
+import BaseSlices from '@/components/base/BaseSlices.vue';
 import { addZerosToNumber, removeDashFromString } from '@/utils/formatter';
 import { getCardBackgroundColor, getSolidColor } from '@/utils/color';
 import { getImgHighQuality } from '@/utils/img';
@@ -129,7 +129,7 @@ export default {
   components: {
     PolarChart,
     PokeAttributes,
-    Slices,
+    BaseSlices,
   },
   data() {
     return {

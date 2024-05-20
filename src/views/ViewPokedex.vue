@@ -42,13 +42,12 @@ import PokeDetails from '@/components/PokeDetails.vue';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
-  name: 'Pokedex',
+  name: 'ViewPokedex',
   components: {
     PokedexHeader,
     PokeFilter,
     PokeList,
     PokeDetails,
-    // PokeExploration,
   },
   data() {
     return {

@@ -14,7 +14,7 @@
 <script>
 /* eslint-disable prefer-const */
 export default {
-  name: 'Slices',
+  name: 'BaseSlices',
   props: {
     options: {
       type: Object,
