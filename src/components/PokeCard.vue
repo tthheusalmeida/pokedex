@@ -169,7 +169,7 @@ export default {
     justify-content: space-around;
   }
 
-  .card_types:hover {
+  .card:hover {
     transform: scale(1.1);
   }
 
